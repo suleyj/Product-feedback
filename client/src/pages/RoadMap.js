@@ -5,17 +5,18 @@ import RoadFeedback from "../components/RoadFeedback";
 
 const RoadMap = () => {
   const [activeStatus, setActiveStatus] = useState("In Progress");
+  console.log(activeStatus);
   const handleStatusClick = (status) => {
     setActiveStatus(status);
   };
 
-  let plannedStyle = "text-dark border-b-orange border-b-4";
-  let inProgressStyle = "text-dark border-b-purple border-b-4";
-  let liveStyle = "text-dark border-b-lightBlue border-b-4";
+  let plannedStyle = "text-dark !border-b-orange !border-b-4";
+  let inProgressStyle = "text-dark !border-b-purple !border-b-4";
+  let liveStyle = "text-dark !border-b-lightBlue !border-b-4";
 
   return (
-    <div className="text-sm text-gray">
-      <div className="flex justify-between items-center bg-dark text-white px-6 py-7">
+    <div className="text-sm text-gray md:px-10 md:py-10 md:max-w-[1100px] md:mx-auto ">
+      <div className="flex justify-between items-center bg-dark text-white px-6 py-7 md:rounded-lg md:mb-12">
         <div>
           <Link to="/" className="flex items-center gap-3 mb-1">
             <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +41,7 @@ const RoadMap = () => {
           <p>Add Feedback</p>
         </Link>
       </div>
-      <div className="flex  justify-around font-bold  text-center mb-6">
+      <div className="flex  justify-around font-bold  text-center mb-6 md:hidden">
         <p
           className={` w-24 flex-1 border-b-gray border-b-[1px] py-5 md:border-none ${
             activeStatus === "Planned" ? plannedStyle : null
@@ -50,9 +51,9 @@ const RoadMap = () => {
           Planned (2)
         </p>
         <p
-          className={` w-24 flex-1 border-b-gray border-b-[1px] py-5 md:border-none ${
+          className={`${
             activeStatus === "In Progress" ? inProgressStyle : null
-          }`}
+          } w-24 flex-1 border-b-gray border-b-[1px] py-5 md:border-none `}
           onClick={() => handleStatusClick("In Progress")}
         >
           In-Progress (3)
@@ -66,17 +67,131 @@ const RoadMap = () => {
           Live (1)
         </p>
       </div>
-      <div className="px-6">
+      <div className="px-6 flex flex-col content-center flex-wrap md:hidden">
         <p className="font-bold text-lg mb-2 text-dark">In-Progress (3)</p>
         <p className="mb-6">Features currently being developed</p>
-        <RoadFeedback
-          title="Add tags for solutions"
-          description="Easier to search for solutions based on a specific stack"
-          tag="Enhancement"
-          upvotes="112"
-          comments="2"
-          status="Live"
-        />
+        <div className="grid grid-cols-1 gap-4 pb-36">
+          <RoadFeedback
+            title="Add tags for solutions"
+            description="Easier to search for solutions based on a specific stack"
+            tag="Enhancement"
+            upvotes="112"
+            comments="2"
+            status="Planned"
+            color="orange"
+          />
+          <RoadFeedback
+            title="Add tags for solutions"
+            description="Easier to search for solutions based on a specific stack"
+            tag="Enhancement"
+            upvotes="112"
+            comments="2"
+            status="Planned"
+            color="orange"
+          />
+          <RoadFeedback
+            title="Add tags for solutions"
+            description="Easier to search for solutions based on a specific stack"
+            tag="Enhancement"
+            upvotes="112"
+            comments="2"
+            status="Planned"
+            color="orange"
+          />
+          <RoadFeedback
+            title="Add tags for solutions"
+            description="Easier to search for solutions based on a specific stack"
+            tag="Enhancement"
+            upvotes="112"
+            comments="2"
+            status="Planned"
+            color="orange"
+          />
+          <RoadFeedback
+            title="Add tags for solutions"
+            description="Easier to search for solutions based on a specific stack"
+            tag="Enhancement"
+            upvotes="112"
+            comments="2"
+            status="Planned"
+            color="orange"
+          />
+        </div>
+      </div>
+
+      <div className="md:flex px-10 gap-3 justify-between md:px-0 hidden ">
+        <div>
+          <p className="font-bold">Planned (2)</p>
+          <p className="mb-8"> Ideas prioritized for research</p>
+          <div className="grid grid-cols-1 gap-4 pb-36">
+            <RoadFeedback
+              title="Add tags for solutions"
+              description="Easier to search for solutions based on a specific stack"
+              tag="Enhancement"
+              upvotes="112"
+              comments="2"
+              status="Planned"
+              color="orange"
+            />
+            <RoadFeedback
+              title="Add tags for solutions"
+              description="Easier to search for solutions based on a specific stack"
+              tag="Enhancement"
+              upvotes="112"
+              comments="2"
+              status="Planned"
+              color="orange"
+            />
+          </div>
+        </div>
+        <div>
+          <p className="font-bold">In Progress (2)</p>
+          <p className="mb-8"> Currently being developed</p>
+          <div className="grid grid-cols-1 gap-4 pb-36">
+            <RoadFeedback
+              title="Add tags for solutions"
+              description="Easier to search for solutions based on a specific stack"
+              tag="Enhancement"
+              upvotes="112"
+              comments="2"
+              status="Planned"
+              color="orange"
+            />
+            <RoadFeedback
+              title="Add tags for solutions"
+              description="Easier to search for solutions based on a specific stack"
+              tag="Enhancement"
+              upvotes="112"
+              comments="2"
+              status="Planned"
+              color="orange"
+            />
+            <RoadFeedback
+              title="Add tags for solutions"
+              description="Easier to search for solutions based on a specific stack"
+              tag="Enhancement"
+              upvotes="112"
+              comments="2"
+              status="Planned"
+              color="orange"
+            />
+          </div>
+        </div>
+        <div>
+          <p className="font-bold">Live (2)</p>
+          <p className="mb-8"> Released Features</p>
+          <div className="grid grid-cols-1 gap-4 pb-36">
+            <RoadFeedback
+              title="Add tags for solutions"
+              description="Easier to search for solutions based on a specific stack"
+              tag="Enhancement"
+              upvotes="112"
+              comments="2"
+              status="Planned"
+              color="orange"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

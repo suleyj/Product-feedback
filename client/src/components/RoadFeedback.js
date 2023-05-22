@@ -8,25 +8,28 @@ const RoadFeedback = ({
   upvotes,
   comments,
   status,
+  color,
 }) => {
-  let color = "";
-  switch (status) {
-    case "In Progress":
-      color = "purple";
-      break;
-    case "Planned":
-      color = "orange";
-      break;
-    case "Live":
-      color = "lightBlue";
-      break;
-    default:
-      break;
-  }
+  // let color = "purple";
+  // switch (status) {
+  //   case "In Progress":
+  //     color = "purple";
+  //     break;
+  //   case "Planned":
+  //     color = "orange";
+  //     break;
+  //   case "Live":
+  //     color = "lightBlue";
+  //     break;
+  //   default:
+  //     break;
+  // }
 
   return (
     <div
-      className={`bg-white p-6 rounded-lg text-sm border-t-${color} border-t-8`}
+      className={
+        "bg-white p-6 rounded-lg text-sm border-t-8 max-w-xs !border-t-" + color
+      }
     >
       <div className="flex items-center mb-4">
         <div className={`w-2 h-2 rounded-full mr-2 bg-${color} bg-t`}>
@@ -36,7 +39,7 @@ const RoadFeedback = ({
       </div>
 
       <p className="text-navyBlue font-bold mb-3">{title}</p>
-      <p className="text-gray mb-2">{description}</p>
+      <p className="text-gray mb-6">{description}</p>
       <div className="rounded-lg px-4 py-2 inline-block text-blue bg-lightIndigo hover:bg-blue hover:text-white font-bold mb-2">
         {tag}
       </div>
