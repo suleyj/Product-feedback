@@ -1,8 +1,9 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { IoMailOutline } from "react-icons/io5";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../context/userContext";
 
 const Login = ({ setAuth }) => {
   const [inputs, setinputs] = useState({
@@ -10,6 +11,8 @@ const Login = ({ setAuth }) => {
     password: "",
     errorMsg: "",
   });
+
+  const { setUserdata } = useContext(UserContext);
 
   const inputChange = (e) => {
     setinputs({ ...inputs, [e.target.name]: e.target.value, errorMsg: "" });
@@ -32,6 +35,7 @@ const Login = ({ setAuth }) => {
       .then((res) => {
         console.log(res.data);
         if (res.status === 200) {
+          setUserdata(res.data.user);
           localStorage.setItem("token", res.data.token);
           setAuth(true);
         }

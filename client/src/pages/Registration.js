@@ -8,26 +8,30 @@ import axios from "axios";
 
 const Registration = ({ setAuth }) => {
   const [inputs, setinputs] = useState({
-    name: "",
+    fullname: "",
     username: "",
     password: "",
     confirm: "",
+    errorMsg: "",
   });
 
   const [fileInput, setfileInput] = useState({});
 
   let inputsChange = (e) => {
-    setinputs({ ...inputs, [e.target.name]: e.target.value });
+    setinputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
   };
 
   let formSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("image", fileInput);
     formData.append("fullname", inputs.fullname);
-    formData.append("username", inputs.name);
+    formData.append("username", inputs.username);
     formData.append("password", inputs.password);
+    formData.append("confirm", inputs.confirm);
 
     try {
       const config = {
@@ -43,7 +47,7 @@ const Registration = ({ setAuth }) => {
         setAuth(true);
       }
     } catch (error) {
-      console.log(error.message);
+      setinputs({ ...inputs, errorMsg: error.response.data });
     }
   };
   return (
@@ -60,8 +64,8 @@ const Registration = ({ setAuth }) => {
             className="pl-6 focus:outline-none w-full"
             type="text"
             placeholder="Enter your name"
-            value={inputs.name}
-            name="name"
+            value={inputs.fullname}
+            name="fullname"
             onChange={(e) => inputsChange(e)}
           />
         </div>
@@ -115,7 +119,7 @@ const Registration = ({ setAuth }) => {
         <button className="text-center w-full bg-black rounded-md p-2 mb-4 text-white">
           Register
         </button>
-
+        <p className="text-red h-6">{inputs.errorMsg}</p>
         <p className="text-gray-400">
           Already have an account?{" "}
           <Link to="/login" className="text-navyBlue font-bold underline">

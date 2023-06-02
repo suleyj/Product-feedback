@@ -5,8 +5,20 @@ const authorization = require("../middleware/authorization");
 router.get("/feedback", authorization, async (req, res) => {
   try {
     const allFeedback = await pool.query(
-      "SELECT * FROM feedback ORDER BY feedbackid ASC "
+      "SELECT * FROM feedback ORDER BY feedback_id ASC "
     );
+
+    const upvotes = await pool.query(
+      "SELECT p.feedback_id, p.title, COUNT(l.feedback_id) AS num_upvotes " +
+        "FROM feedback p LEFT JOIN upvote l ON p.feedback_id = l.feedback_id " +
+        "GROUP BY p.feedback_id, p.title " +
+        "ORDER BY p.feedback_id"
+    );
+
+    for (let i = 0; i < allFeedback.rows.length; i++) {
+      allFeedback.rows[i].upvotes = upvotes.rows[i].num_upvotes;
+    }
+
     console.log("GET all feedback");
     res.json(allFeedback.rows);
   } catch (err) {
@@ -19,9 +31,10 @@ router.get("/feedback/:id", authorization, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const feedback = await pool.query(
-      "SELECT * FROM feedback WHERE feedbackid = $1 ",
+      "SELECT * FROM feedback WHERE feedback_id = $1 ",
       [id]
     );
+
     console.log(`GET feedback ${id}`);
     res.json(feedback.rows);
   } catch (err) {
@@ -35,7 +48,7 @@ router.patch("/feedback/category/:id", authorization, async (req, res) => {
     const id = parseInt(req.params.id);
     const { category } = req.body;
     const feedback = await pool.query(
-      "UPDATE feedback SET category = $1 WHERE feedbackid = $2   RETURNING *;",
+      "UPDATE feedback SET category = $1 WHERE feedback_id = $2   RETURNING *;",
       [category, id]
     );
     console.log(`PATCH category feedback ${id}`);
@@ -51,7 +64,7 @@ router.patch("/feedback/upvotes/:id", authorization, async (req, res) => {
     const id = parseInt(req.params.id);
     const { upvotes } = req.body;
     const feedback = await pool.query(
-      "UPDATE feedback SET upvotes = $1 WHERE feedbackid = $2   RETURNING *;",
+      "UPDATE feedback SET upvotes = $1 WHERE feedback_id = $2   RETURNING *;",
       [upvotes, id]
     );
     console.log(`PATCH upvotes feedback ${id}`);
@@ -66,7 +79,7 @@ router.delete("/feedback/:id", authorization, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const feedback = await pool.query(
-      "DELETE FROM feedback WHERE feedbackid = $1",
+      "DELETE FROM feedback WHERE feedback_id = $1",
       [id]
     );
     console.log(`DELETE feedback ${id}`);

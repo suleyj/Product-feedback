@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import suggestionsImg from "../assets/suggestions/icon-suggestions.svg";
 import emptyImg from "../assets/suggestions/illustration-empty.svg";
@@ -7,8 +7,12 @@ import Dashboard from "../components/Dashboard";
 import Dropdown from "../components/Dropdown";
 import Feedback from "../components/Feedback";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/userContext";
 
 const Home = (props) => {
+  const { userdata } = useContext(UserContext);
+  console.log(userdata);
+
   const [active, setActive] = useState(false);
   const [select, setselect] = useState("Most Upvotes");
   const [feedbackData, setfeedbackData] = useState([]);
@@ -24,6 +28,7 @@ const Home = (props) => {
     const url = "http://localhost:5000/feedback";
 
     axios.get(url, config).then((res) => {
+      console.log(res.data);
       setfeedbackData(res.data);
     });
   }, []);
@@ -70,7 +75,7 @@ const Home = (props) => {
                   alt="Suggestions Icon"
                   className="mr-4"
                 />
-                <p className="mr-2">0</p>
+                <p className="mr-2">{feedbackTotal}</p>
                 <p>Suggestions</p>
               </div>
               <Dropdown
@@ -115,7 +120,11 @@ const Home = (props) => {
             <div className="px-6 pt-8 pb-14 flex flex-col gap-4 md:px-0 lg:col-start-2 lg:col-span-4 lg:self-start">
               {feedbackData
                 .filter((feedback) => {
-                  if (chosenTag === "All" || chosenTag === "") return true;
+                  if (chosenTag === "All" || chosenTag === "") {
+                    return true;
+                  } else if (chosenTag === "User") {
+                    return feedback.account_id === userdata.id;
+                  }
                   return feedback.category === chosenTag;
                 })
                 .sort(sortFunc(select))

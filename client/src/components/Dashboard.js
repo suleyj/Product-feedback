@@ -54,6 +54,11 @@ const Dashboard = (props) => {
             onTagClick={props.onTagClick}
           />
           <Tag
+            tagName="User"
+            selectedTag={props.chosenTag}
+            onTagClick={props.onTagClick}
+          />
+          <Tag
             tagName="Enhancement"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
