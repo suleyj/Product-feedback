@@ -1,7 +1,8 @@
-import { React, useReducer } from "react";
+import { React, useReducer, useContext } from "react";
 import { Link } from "react-router-dom";
 import FormDropdown from "../components/FormDropdown";
 import axios from "axios";
+import { UserContext } from "../context/userContext";
 
 const BaseURL = "http://localhost:5000/feedback";
 const reducer = (state, action) => {
@@ -41,6 +42,7 @@ const reducer = (state, action) => {
   }
 };
 const AddFeedback = () => {
+  const { userdata } = useContext(UserContext);
   const [state, dispatch] = useReducer(reducer, {
     title: "",
     details: "",
@@ -112,12 +114,23 @@ const AddFeedback = () => {
     if (missingInputFlag) {
       return;
     } else {
+      const config = {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      };
+
       axios
-        .post(BaseURL, {
-          title: state.title,
-          details: state.details,
-          category: state.mySelect,
-        })
+        .post(
+          BaseURL,
+          {
+            account_id: userdata.id,
+            title: state.title,
+            details: state.details,
+            category: state.mySelect,
+          },
+          config
+        )
         .then(function (response) {
           dispatch({ type: "newSubmitMsg", payload: "New feedback created!" });
           dispatch({ type: "newDetails", payload: "" });
@@ -215,7 +228,6 @@ const AddFeedback = () => {
             ? "text-green-600"
             : "text-red"
         } font-bold`}
-        text-green-600
       >
         {state.submitMsg}
       </p>

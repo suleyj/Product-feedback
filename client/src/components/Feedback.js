@@ -23,6 +23,7 @@ const Feedback = ({ title, description, tag, upvotes, comments, id }) => {
         </svg>
         {upvotes}
       </div>
+
       <Link
         to="/detail"
         state={{ title, description, tag, upvotes, id }}

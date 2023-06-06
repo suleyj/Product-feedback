@@ -15,8 +15,17 @@ router.get("/feedback", authorization, async (req, res) => {
         "ORDER BY p.feedback_id"
     );
 
+    const counts = await pool.query(
+      "SELECT f.feedback_id, COUNT(c.feedback_id) AS comment_count " +
+        "FROM feedback f " +
+        "LEFT JOIN comment c ON f.feedback_id = c.feedback_id " +
+        "GROUP BY f.feedback_id " +
+        "order by feedback_id"
+    );
+
     for (let i = 0; i < allFeedback.rows.length; i++) {
       allFeedback.rows[i].upvotes = upvotes.rows[i].num_upvotes;
+      allFeedback.rows[i].comment_count = counts.rows[i].comment_count;
     }
 
     console.log("GET all feedback");
@@ -92,10 +101,10 @@ router.delete("/feedback/:id", authorization, async (req, res) => {
 
 router.post("/feedback", authorization, async (req, res) => {
   try {
-    const { title, category, details } = req.body;
+    const { account_id, title, category, details } = req.body;
     const feedback = await pool.query(
-      "INSERT INTO feedback (title, category, details) VALUES ($1, $2, $3) RETURNING *",
-      [title, category, details]
+      "INSERT INTO feedback (account_id, title, category, details) VALUES ($1, $2, $3, $4) RETURNING *",
+      [account_id, title, category, details]
     );
     console.log(`CREATE feedback ${feedback.rows[0].feedbackid}`);
     res.json(feedback.rows);

@@ -9,9 +9,12 @@ import Feedback from "../components/Feedback";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 
-const Home = (props) => {
+const Home = ({ setAuth }) => {
+  const logout = () => {
+    localStorage.removeItem("token");
+    setAuth(false);
+  };
   const { userdata } = useContext(UserContext);
-  console.log(userdata);
 
   const [active, setActive] = useState(false);
   const [select, setselect] = useState("Most Upvotes");
@@ -28,7 +31,6 @@ const Home = (props) => {
     const url = "http://localhost:5000/feedback";
 
     axios.get(url, config).then((res) => {
-      console.log(res.data);
       setfeedbackData(res.data);
     });
   }, []);
@@ -67,7 +69,7 @@ const Home = (props) => {
       <div className="md:px-9 md:py-14 max-w-[1110px] lg:grid lg:grid-cols-4 lg:mx-auto gap-[30px] h-full md:pb-0">
         <Dashboard chosenTag={chosenTag} onTagClick={onTagClick} />
         <div className="lg:col-span-3 lg:self-start">
-          <div className="bg-dark p-4 text-white flex justify-between mt-[60px] md:mt-10 md:rounded-xl  lg:mt-0">
+          <div className="bg-dark p-4 text-white flex flex-col items-center gap-6 min-[500px]:flex-row justify-between mt-[60px] md:mt-10 md:rounded-xl  lg:mt-0">
             <div className="flex items-center gap-10">
               <div className="hidden md:flex">
                 <img
@@ -85,13 +87,21 @@ const Home = (props) => {
                 activeChange={setActive}
               />
             </div>
-            <Link
-              to="/add"
-              className="bg-purple flex px-6 py-3 text-white text-xs font-bold items-center gap-1 rounded-lg"
-            >
-              <img src={plusIcon} alt="Plus Icon" />
-              <p>Add Feedback</p>
-            </Link>
+            <div className="flex gap-6 order-first min-[500px]:order-2">
+              <button
+                className=" bg-slate-600 flex px-6 py-3 text-white text-xs font-bold items-center gap-1 rounded-lg"
+                onClick={() => logout()}
+              >
+                Logout
+              </button>
+              <Link
+                to="/add"
+                className="bg-purple flex px-6 py-3 text-white text-xs font-bold items-center gap-1 rounded-lg"
+              >
+                <img src={plusIcon} alt="Plus Icon" />
+                <p>Add Feedback</p>
+              </Link>
+            </div>
           </div>
           {feedbackTotal < 1 ? (
             <div className="bg-white mx-6 mt-8 rounded-xl flex flex-col justify-center items-center text-center py-20 px-7 md:mx-0 md:px-40">
@@ -135,9 +145,9 @@ const Home = (props) => {
                       description={feedback.details}
                       tag={feedback.category}
                       upvotes={feedback.upvotes}
-                      comments="2"
+                      comments={feedback.comment_count}
                       key={index}
-                      id={feedback.feedbackid}
+                      id={feedback.feedback_id}
                     />
                   );
                 })}

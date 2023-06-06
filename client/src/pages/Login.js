@@ -33,7 +33,6 @@ const Login = ({ setAuth }) => {
     axios
       .post(url, data, config)
       .then((res) => {
-        console.log(res.data);
         if (res.status === 200) {
           setUserdata(res.data.user);
           localStorage.setItem("token", res.data.token);
@@ -47,7 +46,11 @@ const Login = ({ setAuth }) => {
 
   return (
     <div className="flex justify-center items-center mt-20">
-      <form className="bg-white px-5 py-10 rounded-lg" onSubmit={formSubmit}>
+      <form
+        className="bg-white px-5 py-10 rounded-lg"
+        onSubmit={formSubmit}
+        autofill="off"
+      >
         <p className="text-2xl mb-8 font-bold text-navyBlue">Login</p>
         <div className="relative p-2 border-b-2 border-black mb-4">
           <IoMailOutline className="text-xl absolute top-0 left-0 right-0 bottom-0 my-auto" />

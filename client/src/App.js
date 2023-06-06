@@ -22,7 +22,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={authenticated ? <Home /> : <Navigate to="/login" />}
+            element={
+              authenticated ? (
+                <Home setAuth={setAuth} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           ></Route>
           <Route
             path="/add"
