@@ -52,12 +52,32 @@ const Home = ({ setAuth }) => {
     return f1.upvotes > f2.upvotes ? 1 : f1.upvotes < f2.upvotes ? -1 : 0;
   };
 
+  const mostComments = (f1, f2) => {
+    return f1.comment_count < f2.comment_count
+      ? 1
+      : f1.comment_count > f2.comment_count
+      ? -1
+      : 0;
+  };
+
+  const leastComments = (f1, f2) => {
+    return f1.comment_count > f2.comment_count
+      ? 1
+      : f1.comment_count < f2.comment_count
+      ? -1
+      : 0;
+  };
+
   let sortFunc = (sort) => {
     switch (sort) {
       case "Most Upvotes":
         return mostUpvotes;
       case "Least Upvotes":
         return leastUpvotes;
+      case "Most Comments":
+        return mostComments;
+      case "Least Comments":
+        return leastComments;
       default:
         return null;
     }
