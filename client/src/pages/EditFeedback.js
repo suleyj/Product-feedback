@@ -1,10 +1,11 @@
 import { React, useState } from "react";
 import FormDropdown from "../components/FormDropdown";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const EditFeedback = () => {
   const feedback = useLocation().state;
+  const navigate = useNavigate();
 
   //Drop Down states
   const [active, setActive] = useState(false);
@@ -59,6 +60,7 @@ const EditFeedback = () => {
     try {
       await axios.put(url, payload, config);
     } catch (error) {}
+    navigate("/");
   };
 
   const deleteFeedback = async (e) => {
@@ -67,6 +69,7 @@ const EditFeedback = () => {
     try {
       await axios.delete(url, config);
     } catch (error) {}
+    navigate("/");
   };
 
   return (
