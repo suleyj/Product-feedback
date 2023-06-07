@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Feedback = ({ title, description, tag, upvotes, comments, id }) => {
+const Feedback = ({
+  title,
+  description,
+  tag,
+  upvotes,
+  comments,
+  id,
+  status,
+  category,
+}) => {
   return (
     <div className="bg-white p-6 rounded-xl text-sm grid grid-cols-2 md:grid-cols-6 md:px-8 md:py-7">
       <div className=" col-span-2 md:col-span-4">
@@ -26,7 +35,7 @@ const Feedback = ({ title, description, tag, upvotes, comments, id }) => {
 
       <Link
         to="/detail"
-        state={{ title, description, tag, upvotes, id }}
+        state={{ title, description, tag, upvotes, id, status, category }}
         className="flex items-center gap-2 text-navyBlue font-bold justify-self-end"
       >
         <svg width="18" height="16" xmlns="http://www.w3.org/2000/svg">

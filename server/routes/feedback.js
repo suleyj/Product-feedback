@@ -52,15 +52,15 @@ router.get("/feedback/:id", authorization, async (req, res) => {
   }
 });
 
-router.patch("/feedback/category/:id", authorization, async (req, res) => {
+router.put("/feedback/:id", authorization, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const { category } = req.body;
+    const { title, category, status, description } = req.body;
     const feedback = await pool.query(
-      "UPDATE feedback SET category = $1 WHERE feedback_id = $2   RETURNING *;",
-      [category, id]
+      "UPDATE feedback SET title = $1, category = $2, details = #3, status = $4 WHERE feedback_id = $5   RETURNING *;",
+      [title, category, description, status, id]
     );
-    console.log(`PATCH category feedback ${id}`);
+
     res.json(feedback.rows);
   } catch (err) {
     console.error(err.message);
@@ -91,7 +91,6 @@ router.delete("/feedback/:id", authorization, async (req, res) => {
       "DELETE FROM feedback WHERE feedback_id = $1",
       [id]
     );
-    console.log(`DELETE feedback ${id}`);
     res.json(feedback.rows);
   } catch (err) {
     console.error(err.message);

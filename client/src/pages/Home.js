@@ -168,6 +168,7 @@ const Home = ({ setAuth }) => {
                       comments={feedback.comment_count}
                       key={index}
                       id={feedback.feedback_id}
+                      status={feedback.status}
                     />
                   );
                 })}

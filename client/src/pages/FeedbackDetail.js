@@ -11,7 +11,7 @@ const FeedbackDetail = () => {
   //Feedback Id
   const linkState = useLocation().state;
   const id = linkState.id;
-
+  console.log(linkState);
   //state
   const [commentData, setcommentData] = useState([]);
   const [commentInput, setCommentInput] = useState({
@@ -91,6 +91,14 @@ const FeedbackDetail = () => {
         {userdata.role === "admin" && (
           <Link
             to="/edit"
+            state={{
+              id: linkState.id,
+              title: linkState.title,
+              tag: linkState.tag,
+              category: linkState.category,
+              status: linkState.status,
+              description: linkState.description,
+            }}
             className="bg-blue text-lightIndigo font-bold rounded-lg px-4 py-3"
           >
             Edit Feedback

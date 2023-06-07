@@ -1,12 +1,16 @@
 import { React, useState } from "react";
 import FormDropdown from "../components/FormDropdown";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
-const EditFeedback = ({ title, category, feedbackStatus, description }) => {
+const EditFeedback = () => {
+  const feedback = useLocation().state;
+
+  //Drop Down states
   const [active, setActive] = useState(false);
   const [statusActive, setStatusActive] = useState(false);
-  const [select, setselect] = useState(category);
-  const [statusSelect, setStatusselect] = useState(feedbackStatus);
+  const [select, setselect] = useState(feedback.tag);
+  const [statusSelect, setStatusselect] = useState(feedback.status);
 
   const selectChange = (e) => {
     setselect(e.currentTarget.firstChild.innerHTML);
@@ -20,6 +24,50 @@ const EditFeedback = ({ title, category, feedbackStatus, description }) => {
   const categories = ["Feature", "UI", "UX", "Enhancement", "Bug"];
 
   const status = ["Suggestion", "Planned", "In-Progress", "Live"];
+
+  //Title and Description state
+  const [title, settitle] = useState(feedback.title);
+  const [description, setdescription] = useState(feedback.description);
+
+  const onTitleChange = (e) => {
+    settitle(e.target.value);
+  };
+
+  const onDescriptionChange = (e) => {
+    setdescription(e.target.value);
+  };
+
+  //Button event
+
+  const BaseURL = "http://localhost:5000/feedback";
+
+  const config = {
+    headers: {
+      token: localStorage.getItem("token"),
+    },
+  };
+
+  const saveFeedback = async (e) => {
+    e.preventDefault();
+    let url = `${BaseURL}/${feedback.id}`;
+    let payload = {
+      title: title,
+      category: select,
+      status: statusSelect,
+      description: description,
+    };
+    try {
+      await axios.put(url, payload, config);
+    } catch (error) {}
+  };
+
+  const deleteFeedback = async (e) => {
+    e.preventDefault();
+    let url = `${BaseURL}/${feedback.id}`;
+    try {
+      await axios.delete(url, config);
+    } catch (error) {}
+  };
 
   return (
     <div className=" text-sm px-6 pt-8 pb-16 text-gray md:max-w-[540px] md:mx-auto md:pt-14">
@@ -54,13 +102,14 @@ const EditFeedback = ({ title, category, feedbackStatus, description }) => {
           </svg>
         </div>
         <p className="text-navyBlue font-bold text-lg mb-6">
-          Editing '{title}'
+          Editing '{feedback.title}'
         </p>
         <p className="font-bold text-navyBlue mb-1">Feedback Title</p>
         <p className=" mb-4">Add a short, descriptive headline</p>
         <textarea
           className="border-none resize-none bg-lightIndigo rounded-md w-full h-12 p-3 outline-1 outline-blue pb-1"
-          defaultValue={title}
+          value={title}
+          onChange={(e) => onTitleChange(e)}
         />
         <p className="font-bold text-navyBlue mb-1">Category</p>
         <p className="mb-4">Choose a category for your feedback</p>
@@ -86,13 +135,20 @@ const EditFeedback = ({ title, category, feedbackStatus, description }) => {
         </p>
         <textarea
           className="border-none resize-none bg-lightIndigo rounded-md w-full h-28 mb-10 p-3 outline-1 outline-blue pb-1"
-          defaultValue={description}
+          value={description}
+          onChange={(e) => onDescriptionChange(e)}
         />
         <div className="flex flex-col gap-2">
-          <button className=" bg-purple text-lightIndigo font-bold rounded-lg px-14 py-3">
+          <button
+            className=" bg-purple text-lightIndigo font-bold rounded-lg px-14 py-3"
+            onClick={saveFeedback}
+          >
             Save Changes
           </button>
-          <button className=" bg-red  text-lightIndigo font-bold rounded-lg px-14 py-3">
+          <button
+            className=" bg-red  text-lightIndigo font-bold rounded-lg px-14 py-3"
+            onClick={deleteFeedback}
+          >
             Delete
           </button>
         </div>
