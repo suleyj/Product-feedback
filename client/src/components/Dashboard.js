@@ -81,9 +81,17 @@ const Dashboard = (props) => {
               View
             </Link>
           </div>
-          <Status title="Planned" color="bg-orange" />
-          <Status title="In-Progress" color="bg-purple" />
-          <Status title="Live" color="bg-lightBlue" />
+          <Status
+            title="Planned"
+            color="bg-orange"
+            total={props.plannedTotal}
+          />
+          <Status
+            title="In-Progress"
+            color="bg-purple"
+            total={props.inProgressTotal}
+          />
+          <Status title="Live" color="bg-lightBlue" total={props.liveTotal} />
         </div>
       </div>
     </div>

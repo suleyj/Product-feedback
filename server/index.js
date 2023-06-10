@@ -9,7 +9,7 @@ app.use(cors());
 app.use("/auth", require("./routes/jwtAuth"));
 app.use(require("./routes/feedback"));
 app.use(require("./routes/comments"));
-app.use(require("./routes/user"));
+app.use(require("./routes/upvote"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

@@ -50,7 +50,7 @@ const EditFeedback = () => {
 
   const saveFeedback = async (e) => {
     e.preventDefault();
-    let url = `${BaseURL}/${feedback.id}`;
+    let url = `${BaseURL}/${feedback.feedback_id}`;
     let payload = {
       title: title,
       category: select,
@@ -65,7 +65,7 @@ const EditFeedback = () => {
 
   const deleteFeedback = async (e) => {
     e.preventDefault();
-    let url = `${BaseURL}/${feedback.id}`;
+    let url = `${BaseURL}/${feedback.feedback_id}`;
     try {
       await axios.delete(url, config);
     } catch (error) {}

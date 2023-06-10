@@ -15,6 +15,7 @@ module.exports = {
         lightBlue: "#62BCFA",
         dark: "#373F68",
         red: "#D73737",
+        lightPurple: "#CFD7FF",
         overlay: "rgba(0, 0, 0, 0.5)",
       },
       fontFamily: {

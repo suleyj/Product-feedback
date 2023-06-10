@@ -9,7 +9,7 @@ router.get("/feedback", authorization, async (req, res) => {
     );
 
     const upvotes = await pool.query(
-      "SELECT p.feedback_id, p.title, COUNT(l.feedback_id) AS num_upvotes " +
+      "SELECT p.feedback_id, p.title, COUNT(l.feedback_id) AS upvote_count " +
         "FROM feedback p LEFT JOIN upvote l ON p.feedback_id = l.feedback_id " +
         "GROUP BY p.feedback_id, p.title " +
         "ORDER BY p.feedback_id"
@@ -24,7 +24,7 @@ router.get("/feedback", authorization, async (req, res) => {
     );
 
     for (let i = 0; i < allFeedback.rows.length; i++) {
-      allFeedback.rows[i].upvotes = upvotes.rows[i].num_upvotes;
+      allFeedback.rows[i].upvotes = upvotes.rows[i].upvote_count;
       allFeedback.rows[i].comment_count = counts.rows[i].comment_count;
     }
 
@@ -61,22 +61,6 @@ router.put("/feedback/:id", authorization, async (req, res) => {
       [title, category, description, status, id]
     );
 
-    res.json(feedback.rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-router.patch("/feedback/upvotes/:id", authorization, async (req, res) => {
-  try {
-    const id = parseInt(req.params.id);
-    const { upvotes } = req.body;
-    const feedback = await pool.query(
-      "UPDATE feedback SET upvotes = $1 WHERE feedback_id = $2   RETURNING *;",
-      [upvotes, id]
-    );
-    console.log(`PATCH upvotes feedback ${id}`);
     res.json(feedback.rows);
   } catch (err) {
     console.error(err.message);

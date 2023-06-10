@@ -10,7 +10,7 @@ const BaseURL = "http://localhost:5000/comments";
 const FeedbackDetail = () => {
   //Feedback Id
   const linkState = useLocation().state;
-  const id = linkState.id;
+  const id = linkState.feedback.id;
   console.log(linkState);
   //state
   const [commentData, setcommentData] = useState([]);
@@ -92,7 +92,7 @@ const FeedbackDetail = () => {
           <Link
             to="/edit"
             state={{
-              id: linkState.id,
+              id: linkState.feedback.id,
               title: linkState.title,
               tag: linkState.tag,
               category: linkState.category,

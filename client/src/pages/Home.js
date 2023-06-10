@@ -21,6 +21,19 @@ const Home = ({ setAuth }) => {
   const [feedbackData, setfeedbackData] = useState([]);
   const [chosenTag, setChosenTag] = useState("");
 
+  //status totals
+  const PlannedTotal = feedbackData.filter((feedback) => {
+    return feedback.status === "Planned";
+  }).length;
+
+  const InProgressTotal = feedbackData.filter((feedback) => {
+    return feedback.status === "inProgress";
+  }).length;
+
+  const LiveTotal = feedbackData.filter((feedback) => {
+    return feedback.status === "live";
+  }).length;
+
   useEffect(() => {
     const config = {
       headers: {
@@ -87,7 +100,13 @@ const Home = ({ setAuth }) => {
   return (
     <div className="flex flex-col">
       <div className="md:px-9 md:py-14 max-w-[1110px] lg:grid lg:grid-cols-4 lg:mx-auto gap-[30px] h-full md:pb-0">
-        <Dashboard chosenTag={chosenTag} onTagClick={onTagClick} />
+        <Dashboard
+          chosenTag={chosenTag}
+          onTagClick={onTagClick}
+          plannedTotal={PlannedTotal}
+          inProgressTotal={InProgressTotal}
+          liveTotal={LiveTotal}
+        />
         <div className="lg:col-span-3 lg:self-start">
           <div className="bg-dark p-4 text-white flex flex-col items-center gap-6 min-[500px]:flex-row justify-between mt-[60px] md:mt-10 md:rounded-xl  lg:mt-0">
             <div className="flex items-center gap-10">
@@ -164,10 +183,11 @@ const Home = ({ setAuth }) => {
                       title={feedback.title}
                       description={feedback.details}
                       tag={feedback.category}
-                      upvotes={feedback.upvotes}
+                      upvotes={feedback.upvote_count}
                       comments={feedback.comment_count}
                       key={index}
-                      id={feedback.feedback_id}
+                      feedback_id={feedback.feedback_id}
+                      account_id={userdata.id}
                       status={feedback.status}
                     />
                   );
