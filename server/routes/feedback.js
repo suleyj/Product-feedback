@@ -28,7 +28,6 @@ router.get("/feedback", authorization, async (req, res) => {
       allFeedback.rows[i].comment_count = counts.rows[i].comment_count;
     }
 
-    console.log("GET all feedback");
     res.json(allFeedback.rows);
   } catch (err) {
     console.error(err.message);
@@ -43,8 +42,6 @@ router.get("/feedback/:id", authorization, async (req, res) => {
       "SELECT * FROM feedback WHERE feedback_id = $1 ",
       [id]
     );
-
-    console.log(`GET feedback ${id}`);
     res.json(feedback.rows);
   } catch (err) {
     console.error(err.message);

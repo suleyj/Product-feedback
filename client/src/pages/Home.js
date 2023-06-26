@@ -27,12 +27,16 @@ const Home = ({ setAuth }) => {
   }).length;
 
   const InProgressTotal = feedbackData.filter((feedback) => {
-    return feedback.status === "inProgress";
+    return feedback.status === "In-Progress";
   }).length;
 
   const LiveTotal = feedbackData.filter((feedback) => {
-    return feedback.status === "live";
+    return feedback.status === "Live";
   }).length;
+
+  const feedbacks = feedbackData.filter((feedback) => {
+    return feedback.status === "Suggestion";
+  });
 
   useEffect(() => {
     const config = {
@@ -96,7 +100,7 @@ const Home = ({ setAuth }) => {
     }
   };
 
-  let feedbackTotal = feedbackData.length;
+  let feedbackTotal = feedbacks.length;
   return (
     <div className="flex flex-col">
       <div className="md:px-9 md:py-14 max-w-[1110px] lg:grid lg:grid-cols-4 lg:mx-auto gap-[30px] h-full md:pb-0">
@@ -167,7 +171,7 @@ const Home = ({ setAuth }) => {
             </div>
           ) : (
             <div className="px-6 pt-8 pb-14 flex flex-col gap-4 md:px-0 lg:col-start-2 lg:col-span-4 lg:self-start">
-              {feedbackData
+              {feedbacks
                 .filter((feedback) => {
                   if (chosenTag === "All" || chosenTag === "") {
                     return true;

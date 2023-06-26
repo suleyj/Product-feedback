@@ -2,8 +2,38 @@ import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import plusIcon from "../assets/shared/icon-plus.svg";
 import RoadFeedback from "../components/RoadFeedback";
+import axios from "axios";
 
 const RoadMap = () => {
+  const [feedbackData, setfeedbackData] = useState([]);
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    };
+
+    const url = "http://localhost:5000/feedback";
+
+    axios.get(url, config).then((res) => {
+      setfeedbackData(res.data);
+    });
+  }, []);
+
+  let plannedFeed = feedbackData.filter((feedback) => {
+    return feedback.status === "Planned";
+  });
+
+  let progressFeed = feedbackData.filter((feedback) => {
+    return feedback.status === "In-Progress";
+  });
+
+  let liveFeed = feedbackData.filter((feedback) => {
+    return feedback.status === "Live";
+  });
+
+  // let feedbackTypes = [{title:'Planned', },]
   const [activeStatus, setActiveStatus] = useState("In Progress");
   console.log(activeStatus);
   const handleStatusClick = (status) => {
@@ -80,116 +110,68 @@ const RoadMap = () => {
             status="Planned"
             color="orange"
           />
-          <RoadFeedback
-            title="Add tags for solutions"
-            description="Easier to search for solutions based on a specific stack"
-            tag="Enhancement"
-            upvotes="112"
-            comments="2"
-            status="Planned"
-            color="orange"
-          />
-          <RoadFeedback
-            title="Add tags for solutions"
-            description="Easier to search for solutions based on a specific stack"
-            tag="Enhancement"
-            upvotes="112"
-            comments="2"
-            status="Planned"
-            color="orange"
-          />
-          <RoadFeedback
-            title="Add tags for solutions"
-            description="Easier to search for solutions based on a specific stack"
-            tag="Enhancement"
-            upvotes="112"
-            comments="2"
-            status="Planned"
-            color="orange"
-          />
-          <RoadFeedback
-            title="Add tags for solutions"
-            description="Easier to search for solutions based on a specific stack"
-            tag="Enhancement"
-            upvotes="112"
-            comments="2"
-            status="Planned"
-            color="orange"
-          />
         </div>
       </div>
 
       <div className="md:flex px-10 gap-3 justify-between md:px-0 hidden ">
         <div>
-          <p className="font-bold">Planned (2)</p>
+          <p className="font-bold">Planned ({plannedFeed.length})</p>
           <p className="mb-8"> Ideas prioritized for research</p>
           <div className="grid grid-cols-1 gap-4 pb-36">
-            <RoadFeedback
-              title="Add tags for solutions"
-              description="Easier to search for solutions based on a specific stack"
-              tag="Enhancement"
-              upvotes="112"
-              comments="2"
-              status="Planned"
-              color="orange"
-            />
-            <RoadFeedback
-              title="Add tags for solutions"
-              description="Easier to search for solutions based on a specific stack"
-              tag="Enhancement"
-              upvotes="112"
-              comments="2"
-              status="Planned"
-              color="orange"
-            />
+            {plannedFeed.map((feedback, index) => {
+              return (
+                <RoadFeedback
+                  title={feedback.title}
+                  description={feedback.details}
+                  tag={feedback.category}
+                  upvotes="112"
+                  comments={feedback.comment_count}
+                  status={feedback.status}
+                  key={index}
+                  feedback_id={feedback.feedback_id}
+                />
+              );
+            })}
           </div>
         </div>
         <div>
           <p className="font-bold">In Progress (2)</p>
           <p className="mb-8"> Currently being developed</p>
           <div className="grid grid-cols-1 gap-4 pb-36">
-            <RoadFeedback
-              title="Add tags for solutions"
-              description="Easier to search for solutions based on a specific stack"
-              tag="Enhancement"
-              upvotes="112"
-              comments="2"
-              status="Planned"
-              color="orange"
-            />
-            <RoadFeedback
-              title="Add tags for solutions"
-              description="Easier to search for solutions based on a specific stack"
-              tag="Enhancement"
-              upvotes="112"
-              comments="2"
-              status="Planned"
-              color="orange"
-            />
-            <RoadFeedback
-              title="Add tags for solutions"
-              description="Easier to search for solutions based on a specific stack"
-              tag="Enhancement"
-              upvotes="112"
-              comments="2"
-              status="Planned"
-              color="orange"
-            />
+            {progressFeed.map((feedback, index) => {
+              return (
+                <RoadFeedback
+                  title={feedback.title}
+                  description={feedback.details}
+                  tag={feedback.category}
+                  upvotes="112"
+                  comments={feedback.comment_count}
+                  status={feedback.status}
+                  key={index}
+                  feedback_id={feedback.feedback_id}
+                />
+              );
+            })}
           </div>
         </div>
         <div>
           <p className="font-bold">Live (2)</p>
           <p className="mb-8"> Released Features</p>
           <div className="grid grid-cols-1 gap-4 pb-36">
-            <RoadFeedback
-              title="Add tags for solutions"
-              description="Easier to search for solutions based on a specific stack"
-              tag="Enhancement"
-              upvotes="112"
-              comments="2"
-              status="Planned"
-              color="orange"
-            />
+            {liveFeed.map((feedback, index) => {
+              return (
+                <RoadFeedback
+                  title={feedback.title}
+                  description={feedback.details}
+                  tag={feedback.category}
+                  upvotes="112"
+                  comments={feedback.comment_count}
+                  status={feedback.status}
+                  key={index}
+                  feedback_id={feedback.feedback_id}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

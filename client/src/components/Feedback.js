@@ -51,7 +51,7 @@ const Feedback = ({
         </div>
       </div>
       <button
-        className={`rounded-lg px-4 py-2 bg-lightIndigo text-navyBlue font-bold flex items-center gap-2 md:justify-self-start md:order-first md:self-start  md:flex-col md:px-2 md:py-3 hover:bg-lightPurple md:w-10 w-[75px] justify-between ${
+        className={`rounded-lg px-4 py-2 bg-lightIndigo text-navyBlue font-bold flex hidden items-center gap-2 md:justify-self-start md:order-first md:self-start  md:flex-col md:px-2 md:py-3 hover:bg-lightPurple md:w-10 w-[75px] justify-between ${
           upvote ? upvoteStyle : null
         }`}
         onClick={toggleUpvote}

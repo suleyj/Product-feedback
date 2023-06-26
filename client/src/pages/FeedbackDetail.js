@@ -10,7 +10,7 @@ const BaseURL = "http://localhost:5000/comments";
 const FeedbackDetail = () => {
   //Feedback Id
   const linkState = useLocation().state;
-  const id = linkState.feedback.id;
+  const id = linkState.feedback_id;
   console.log(linkState);
   //state
   const [commentData, setcommentData] = useState([]);
@@ -41,7 +41,6 @@ const FeedbackDetail = () => {
 
       try {
         const response = await axios.get(url, config);
-        console.log(response.data);
         setcommentData(response.data);
       } catch (err) {}
     }
@@ -68,7 +67,6 @@ const FeedbackDetail = () => {
     try {
       await axios.post(url, payload, config);
     } catch (error) {}
-    console.log(commentInput.text);
     setCommentInput({ ...commentData, text: "" });
     setflag(!flag);
   };
@@ -92,10 +90,9 @@ const FeedbackDetail = () => {
           <Link
             to="/edit"
             state={{
-              id: linkState.feedback.id,
+              id: linkState.feedback_id,
               title: linkState.title,
               tag: linkState.tag,
-              category: linkState.category,
               status: linkState.status,
               description: linkState.description,
             }}

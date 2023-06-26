@@ -5,6 +5,7 @@ import axios from "axios";
 
 const EditFeedback = () => {
   const feedback = useLocation().state;
+  console.log(feedback);
   const navigate = useNavigate();
 
   //Drop Down states
@@ -50,7 +51,7 @@ const EditFeedback = () => {
 
   const saveFeedback = async (e) => {
     e.preventDefault();
-    let url = `${BaseURL}/${feedback.feedback_id}`;
+    let url = `${BaseURL}/${feedback.id}`;
     let payload = {
       title: title,
       category: select,

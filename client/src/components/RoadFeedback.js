@@ -8,31 +8,33 @@ const RoadFeedback = ({
   upvotes,
   comments,
   status,
-  color,
+  feedback_id,
 }) => {
-  // let color = "purple";
-  // switch (status) {
-  //   case "In Progress":
-  //     color = "purple";
-  //     break;
-  //   case "Planned":
-  //     color = "orange";
-  //     break;
-  //   case "Live":
-  //     color = "lightBlue";
-  //     break;
-  //   default:
-  //     break;
-  // }
+  let color = "";
+  switch (status) {
+    case "In-Progress":
+      color = "#AD1FEA";
+      break;
+    case "Planned":
+      color = "#F49F85";
+      break;
+    case "Live":
+      color = "#62BCFA";
+      break;
+    default:
+      break;
+  }
 
   return (
     <div
-      className={
-        "bg-white p-6 rounded-lg text-sm border-t-8 max-w-xs !border-t-" + color
-      }
+      className={"bg-white p-6 rounded-lg text-sm border-t-8 max-w-xs"}
+      style={{ borderTopColor: color }}
     >
       <div className="flex items-center mb-4">
-        <div className={`w-2 h-2 rounded-full mr-2 bg-${color} bg-t`}>
+        <div
+          className={`w-2 h-2 rounded-full mr-2  bg-t`}
+          style={{ background: color }}
+        >
           &nbsp;
         </div>
         <p>{status}</p>
@@ -58,6 +60,15 @@ const RoadFeedback = ({
         </div>
         <Link
           to="/detail"
+          state={{
+            title,
+            description,
+            tag,
+            upvotes,
+            feedback_id,
+            status,
+            tag,
+          }}
           className="flex items-center gap-2 text-navyBlue font-bold"
         >
           <svg width="18" height="16" xmlns="http://www.w3.org/2000/svg">
