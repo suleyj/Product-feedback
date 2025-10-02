@@ -5,22 +5,22 @@ const authorization = require("../middleware/authorization");
 router.get("/feedback", authorization, async (req, res) => {
   try {
     const allFeedback = await pool.query(
-      "SELECT * FROM feedback ORDER BY feedback_id ASC "
+      "SELECT * FROM feedback ORDER BY id ASC "
     );
 
     const upvotes = await pool.query(
-      "SELECT p.feedback_id, p.title, COUNT(l.feedback_id) AS upvote_count " +
-        "FROM feedback p LEFT JOIN upvote l ON p.feedback_id = l.feedback_id " +
-        "GROUP BY p.feedback_id, p.title " +
-        "ORDER BY p.feedback_id"
+      "SELECT f.id, f.title, COUNT(u.id) AS upvote_count " +
+        "FROM feedback f LEFT JOIN upvotes u ON f.id = u.feedback_id " +
+        "GROUP BY f.id, f.title " +
+        "ORDER BY f.id"
     );
 
     const counts = await pool.query(
-      "SELECT f.feedback_id, COUNT(c.feedback_id) AS comment_count " +
+      "SELECT f.id, COUNT(c.id) AS comment_count " +
         "FROM feedback f " +
-        "LEFT JOIN comment c ON f.feedback_id = c.feedback_id " +
-        "GROUP BY f.feedback_id " +
-        "order by feedback_id"
+        "LEFT JOIN comments c ON f.id = c.feedback_id " +
+        "GROUP BY f.id " +
+        "order by f.id"
     );
 
     for (let i = 0; i < allFeedback.rows.length; i++) {
@@ -39,7 +39,7 @@ router.get("/feedback/:id", authorization, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const feedback = await pool.query(
-      "SELECT * FROM feedback WHERE feedback_id = $1 ",
+      "SELECT * FROM feedback WHERE id = $1 ",
       [id]
     );
     res.json(feedback.rows);

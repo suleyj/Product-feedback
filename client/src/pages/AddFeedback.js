@@ -124,7 +124,7 @@ const AddFeedback = () => {
         .post(
           BaseURL,
           {
-            account_id: userdata.id,
+            user_id: userdata.id,
             title: state.title,
             details: state.details,
             category: state.mySelect,
@@ -158,11 +158,11 @@ const AddFeedback = () => {
             fillRule="evenodd"
           />
         </svg>
-        <p className="text-gray font-bold">Go Back</p>
+        <p className="font-bold text-gray">Go Back</p>
       </Link>
 
-      <form className="bg-white rounded-lg p-6 pt-8 relative mb-1">
-        <div className="bg-purple inline-block p-4 rounded-full absolute top-0 -translate-y-1/2 ">
+      <form className="relative p-6 pt-8 mb-1 bg-white rounded-lg">
+        <div className="absolute top-0 inline-block p-4 -translate-y-1/2 rounded-full bg-purple ">
           <svg width="9" height="9" xmlns="http://www.w3.org/2000/svg">
             <text
               transform="translate(-24 -20)"
@@ -178,11 +178,11 @@ const AddFeedback = () => {
             </text>
           </svg>
         </div>
-        <p className="text-navyBlue font-bold text-lg mb-6">
+        <p className="mb-6 text-lg font-bold text-navyBlue">
           Create New Feedback
         </p>
-        <p className="font-bold text-navyBlue mb-1">Feedback Title</p>
-        <p className=" mb-4">Add a short, descriptive headline</p>
+        <p className="mb-1 font-bold text-navyBlue">Feedback Title</p>
+        <p className="mb-4 ">Add a short, descriptive headline</p>
         <textarea
           className={`resize-none bg-lightIndigo rounded-md w-full h-12 p-3 outline-1 outline-blue pb-1 ${
             state.titleOutline ? "border-red border-2 border-solid" : ""
@@ -190,8 +190,8 @@ const AddFeedback = () => {
           onChange={titleChange}
           value={state.title}
         />
-        <p className="text-red h-6">{state.titleMsg}</p>
-        <p className="font-bold text-navyBlue mb-1">Category</p>
+        <p className="h-6 text-red">{state.titleMsg}</p>
+        <p className="mb-1 font-bold text-navyBlue">Category</p>
         <p className="mb-4">Choose a category for your feedback</p>
         <FormDropdown
           selectChange={selectChange}
@@ -202,7 +202,7 @@ const AddFeedback = () => {
           }}
           options={["Feature", "UI", "UX", "Enhancement", "Bug"]}
         />
-        <p className="font-bold text-navyBlue mb-1">Feedback Detail</p>
+        <p className="mb-1 font-bold text-navyBlue">Feedback Detail</p>
         <p className="mb-4">
           Include any specific comments on what should be improved, added, etc.
         </p>
@@ -213,10 +213,10 @@ const AddFeedback = () => {
           onChange={detailsChange}
           value={state.details}
         />
-        <p className="text-red h-6">{state.detailsMsg}</p>
+        <p className="h-6 text-red">{state.detailsMsg}</p>
         <button
           type="submit"
-          className="block w-full bg-purple text-lightIndigo font-bold rounded-lg px-14 py-3"
+          className="block w-full py-3 font-bold rounded-lg bg-purple text-lightIndigo px-14"
           onClick={test}
         >
           Add Feedback

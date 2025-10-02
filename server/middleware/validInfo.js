@@ -10,8 +10,6 @@ module.exports = function (req, res, next) {
       return res.status(401).json("Missing Credentials");
     } else if (!validUsername(username)) {
       return res.status(401).json("Invalid Username");
-    } else if (req.file === undefined) {
-      return res.status(401).json("Missing Image");
     } else if (password !== confirm) {
       return res.status(401).json("Passwords do not match");
     }

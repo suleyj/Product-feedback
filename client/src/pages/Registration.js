@@ -15,7 +15,7 @@ const Registration = ({ setAuth }) => {
     errorMsg: "",
   });
 
-  const [fileInput, setfileInput] = useState({});
+  // const [fileInput, setfileInput] = useState({});
 
   let inputsChange = (e) => {
     setinputs({
@@ -27,7 +27,7 @@ const Registration = ({ setAuth }) => {
   let formSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("image", fileInput);
+    // formData.append("image", fileInput);
     formData.append("fullname", inputs.fullname);
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
@@ -51,17 +51,17 @@ const Registration = ({ setAuth }) => {
     }
   };
   return (
-    <div className="flex justify-center items-center mt-20">
+    <div className="flex items-center justify-center mt-20">
       <form
-        className="bg-white px-8 py-10 rounded-lg w-80"
+        className="px-8 py-10 bg-white rounded-lg w-80"
         onSubmit={formSubmit}
       >
-        <p className="text-2xl mb-8 font-bold text-navyBlue">Registration</p>
+        <p className="mb-8 text-2xl font-bold text-navyBlue">Registration</p>
 
-        <div className="relative p-2 border-b border-black mb-4">
-          <IoPersonAddOutline className="text-xl absolute top-0 left-0 right-0 bottom-0 my-auto" />
+        <div className="relative p-2 mb-4 border-b border-black">
+          <IoPersonAddOutline className="absolute top-0 bottom-0 left-0 right-0 my-auto text-xl" />
           <input
-            className="pl-6 focus:outline-none w-full"
+            className="w-full pl-6 focus:outline-none"
             type="text"
             placeholder="Enter your name"
             value={inputs.fullname}
@@ -69,10 +69,10 @@ const Registration = ({ setAuth }) => {
             onChange={(e) => inputsChange(e)}
           />
         </div>
-        <div className="relative p-2 border-b border-black mb-4">
-          <IoMailOutline className="text-xl absolute top-0 left-0 right-0 bottom-0 my-auto" />
+        <div className="relative p-2 mb-4 border-b border-black">
+          <IoMailOutline className="absolute top-0 bottom-0 left-0 right-0 my-auto text-xl" />
           <input
-            className="pl-6 focus:outline-none w-full"
+            className="w-full pl-6 focus:outline-none"
             type="text"
             placeholder="Enter your username"
             value={inputs.username}
@@ -80,8 +80,8 @@ const Registration = ({ setAuth }) => {
             onChange={(e) => inputsChange(e)}
           />
         </div>
-        <div className="relative p-2 ">
-          <IoImagesOutline className="text-xl absolute top-0 left-0 right-0 bottom-0 my-auto" />
+        {/* <div className="relative p-2 ">
+          <IoImagesOutline className="absolute top-0 bottom-0 left-0 right-0 my-auto text-xl" />
           <input
             type="file"
             className="pl-6 focus:outline-none"
@@ -91,11 +91,11 @@ const Registration = ({ setAuth }) => {
             placeholder="choose profile image"
             onChange={(e) => setfileInput(e.target.files[0])}
           />
-        </div>
-        <div className="relative p-2 border-b border-black mb-4">
-          <IoLockClosedOutline className=" text-xl absolute top-0 left-0 right-0 bottom-0 my-auto" />
+        </div> */}
+        <div className="relative p-2 mb-4 border-b border-black">
+          <IoLockClosedOutline className="absolute top-0 bottom-0 left-0 right-0 my-auto text-xl " />
           <input
-            className="pl-6 focus:outline-none w-full"
+            className="w-full pl-6 focus:outline-none"
             type="password"
             placeholder="Enter your password"
             value={inputs.password}
@@ -104,10 +104,10 @@ const Registration = ({ setAuth }) => {
           />
         </div>
 
-        <div className="relative p-2 border-b border-black mb-8">
-          <IoLockClosedOutline className=" text-xl absolute top-0 left-0 right-0 bottom-0 my-auto" />
+        <div className="relative p-2 mb-8 border-b border-black">
+          <IoLockClosedOutline className="absolute top-0 bottom-0 left-0 right-0 my-auto text-xl " />
           <input
-            className="pl-6 focus:outline-none w-full"
+            className="w-full pl-6 focus:outline-none"
             type="password"
             placeholder="Enter password again"
             value={inputs.confirm}
@@ -116,13 +116,13 @@ const Registration = ({ setAuth }) => {
           />
         </div>
 
-        <button className="text-center w-full bg-black rounded-md p-2 mb-4 text-white">
+        <button className="w-full p-2 mb-4 text-center text-white bg-black rounded-md">
           Register
         </button>
-        <p className="text-red h-6">{inputs.errorMsg}</p>
+        <p className="h-6 text-red">{inputs.errorMsg}</p>
         <p className="text-gray-400">
           Already have an account?{" "}
-          <Link to="/login" className="text-navyBlue font-bold underline">
+          <Link to="/login" className="font-bold underline text-navyBlue">
             Sign in
           </Link>
         </p>

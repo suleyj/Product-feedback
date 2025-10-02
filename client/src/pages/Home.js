@@ -101,6 +101,9 @@ const Home = ({ setAuth }) => {
   };
 
   let feedbackTotal = feedbacks.length;
+
+  console.log(feedbackData);
+  
   return (
     <div className="flex flex-col">
       <div className="md:px-9 md:py-14 max-w-[1110px] lg:grid lg:grid-cols-4 lg:mx-auto gap-[30px] h-full md:pb-0">
@@ -132,14 +135,14 @@ const Home = ({ setAuth }) => {
             </div>
             <div className="flex gap-6 order-first min-[500px]:order-2">
               <button
-                className=" bg-slate-600 flex px-6 py-3 text-white text-xs font-bold items-center gap-1 rounded-lg"
+                className="flex items-center gap-1 px-6 py-3 text-xs font-bold text-white rounded-lg bg-slate-600"
                 onClick={() => logout()}
               >
                 Logout
               </button>
               <Link
                 to="/add"
-                className="bg-purple flex px-6 py-3 text-white text-xs font-bold items-center gap-1 rounded-lg"
+                className="flex items-center gap-1 px-6 py-3 text-xs font-bold text-white rounded-lg bg-purple"
               >
                 <img src={plusIcon} alt="Plus Icon" />
                 <p>Add Feedback</p>
@@ -147,30 +150,30 @@ const Home = ({ setAuth }) => {
             </div>
           </div>
           {feedbackTotal < 1 ? (
-            <div className="bg-white mx-6 mt-8 rounded-xl flex flex-col justify-center items-center text-center py-20 px-7 md:mx-0 md:px-40">
+            <div className="flex flex-col items-center justify-center py-20 mx-6 mt-8 text-center bg-white rounded-xl px-7 md:mx-0 md:px-40">
               <img
                 className=" mb-11"
                 src={emptyImg}
                 width="102"
                 alt="Empty feedback list"
               />
-              <p className=" text-lg font-bold text-navyBlue mb-4">
+              <p className="mb-4 text-lg font-bold text-navyBlue">
                 There is no feedback yet.
               </p>
-              <p className=" mb-7 text-sm">
+              <p className="text-sm mb-7">
                 Got a suggestion? Found a bug that needs to be squashed? We love
                 hearing about new ideas to improve our app
               </p>
               <Link
                 to="/add"
-                className="bg-purple flex px-6 py-3 text-white text-xs font-bold items-center gap-1 rounded-lg"
+                className="flex items-center gap-1 px-6 py-3 text-xs font-bold text-white rounded-lg bg-purple"
               >
                 <img src={plusIcon} alt="Plus Icon" />
                 <p>Add Feedback</p>
               </Link>
             </div>
           ) : (
-            <div className="px-6 pt-8 pb-14 flex flex-col gap-4 md:px-0 lg:col-start-2 lg:col-span-4 lg:self-start">
+            <div className="flex flex-col gap-4 px-6 pt-8 pb-14 md:px-0 lg:col-start-2 lg:col-span-4 lg:self-start">
               {feedbacks
                 .filter((feedback) => {
                   if (chosenTag === "All" || chosenTag === "") {

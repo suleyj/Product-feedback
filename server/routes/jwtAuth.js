@@ -20,13 +20,11 @@ router.post(
   validInfo,
   async (req, res) => {
     try {
-      console.log(req.body);
-      console.log(req.file);
       //1.destructure the req.body (name, email, password)
       const { fullname, username, password } = req.body;
       //2. check if user exist(if user exis then throw error)
       const account = await pool.query(
-        "SELECT * FROM account WHERE username = $1",
+        "SELECT * FROM users WHERE username = $1",
         [username]
       );
       if (account.rows.length !== 0) {
@@ -39,20 +37,20 @@ router.post(
       const bcryptPassword = await bcrypt.hash(password, salt);
 
       //4. put image on aws
-      const fileName = generateFileName();
-      const params = {
-        Bucket: BUCKET_NAME,
-        Key: fileName,
-        Body: req.file.buffer,
-        ContentType: req.file.mimetype,
-      };
-      const command = new PutObjectCommand(params);
-      await s3Client.send(command);
+      // const fileName = generateFileName();
+      // const params = {
+      //   Bucket: BUCKET_NAME,
+      //   Key: fileName,
+      //   Body: req.file.buffer,
+      //   ContentType: req.file.mimetype,
+      // };
+      // const command = new PutObjectCommand(params);
+      // await s3Client.send(command);
 
       //5. enter the new user inside our database
       let newUser = await pool.query(
-        "INSERT INTO account (fullname, username, password, image_name) VALUES ($1, $2, $3, $4) RETURNING *",
-        [fullname, username, bcryptPassword, fileName]
+        "INSERT INTO users (fullname, username, password) VALUES ($1, $2, $3) RETURNING *",
+        [fullname, username, bcryptPassword ]
       );
 
       //5. generating our jwt token
@@ -72,7 +70,7 @@ router.post("/login", validInfo, async (req, res) => {
     const { username, password } = req.body;
 
     //2. check if user doesn't exist (if not then we throw error)
-    const user = await pool.query("SELECT * FROM account WHERE username = $1", [
+    const user = await pool.query("SELECT * FROM users WHERE username = $1", [
       username,
     ]);
 
@@ -88,10 +86,10 @@ router.post("/login", validInfo, async (req, res) => {
     }
 
     //4.give them a jwtToken
-    const token = jwtGenerator(user.rows[0].account_id);
+    const token = jwtGenerator(user.rows[0].user_id);
     res.json({
       token: token,
-      user: { id: user.rows[0].account_id, role: user.rows[0].user_role },
+      user: { id: user.rows[0].user_id },
     });
   } catch (err) {
     console.error(err.message);
@@ -99,12 +97,12 @@ router.post("/login", validInfo, async (req, res) => {
   }
 });
 
-router.get("/is-verify", authorization, async (req, res) => {
-  try {
-    res.json(true);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+// router.get("/is-verify", authorization, async (req, res) => {
+//   try {
+//     res.json(true);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 module.exports = router;
