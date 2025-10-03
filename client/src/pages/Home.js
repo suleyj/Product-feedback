@@ -102,7 +102,7 @@ const Home = ({ setAuth }) => {
 
   let feedbackTotal = feedbacks.length;
 
-  console.log(feedbackData);
+  console.log(userdata);
   
   return (
     <div className="flex flex-col">
@@ -179,7 +179,7 @@ const Home = ({ setAuth }) => {
                   if (chosenTag === "All" || chosenTag === "") {
                     return true;
                   } else if (chosenTag === "User") {
-                    return feedback.account_id === userdata.id;
+                    return feedback.user_id === userdata.id;
                   }
                   return feedback.category === chosenTag;
                 })

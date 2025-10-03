@@ -54,7 +54,7 @@ router.post(
       );
 
       //5. generating our jwt token
-      const token = jwtGenerator(newUser.rows[0].user_id);
+      const token = jwtGenerator(newUser.rows[0].id);
       res.json({ token });
     } catch (err) {
       console.error(err.message);
@@ -86,10 +86,10 @@ router.post("/login", validInfo, async (req, res) => {
     }
 
     //4.give them a jwtToken
-    const token = jwtGenerator(user.rows[0].user_id);
+    const token = jwtGenerator(user.rows[0].id);
     res.json({
       token: token,
-      user: { id: user.rows[0].user_id },
+      user: { id: user.rows[0].id },
     });
   } catch (err) {
     console.error(err.message);

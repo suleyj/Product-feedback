@@ -34,6 +34,8 @@ const Login = ({ setAuth }) => {
       .post(url, data, config)
       .then((res) => {
         if (res.status === 200) {
+          console.log(res.data);
+          
           setUserdata(res.data.user);
           localStorage.setItem("token", res.data.token);
           setAuth(true);
