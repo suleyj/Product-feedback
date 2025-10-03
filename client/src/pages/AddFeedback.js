@@ -140,12 +140,12 @@ const AddFeedback = () => {
           console.log(error);
           dispatch({
             type: "newSubmitMsg",
-            payload: "Duplicate feedback title",
+            payload: "Error occured when adding feedback",
           });
         });
     }
   };
-
+  
   return (
     <div className=" text-sm px-8 text-gray md:max-w-[540px] md:mx-auto md:pt-8">
       <Link to="/" className="flex items-center gap-3 mb-10 ">

@@ -33,7 +33,7 @@ function AppRoutes() {
           console.log(decoded);
           
           setauthenticated(true);
-          setUserdata(decoded);
+          setUserdata(decoded.user);
         } else {
           localStorage.removeItem("token");
           setauthenticated(false);

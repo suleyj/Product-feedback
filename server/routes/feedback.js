@@ -81,10 +81,10 @@ router.delete("/feedback/:id", authorization, async (req, res) => {
 
 router.post("/feedback", authorization, async (req, res) => {
   try {
-    const { account_id, title, category, details } = req.body;
+    const { user_id, title, category, details } = req.body;
     const feedback = await pool.query(
-      "INSERT INTO feedback (account_id, title, category, details) VALUES ($1, $2, $3, $4) RETURNING *",
-      [account_id, title, category, details]
+      "INSERT INTO feedback (user_id, status, title, category, details) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [user_id, "Suggestion", title, category, details]
     );
     console.log(`CREATE feedback ${feedback.rows[0].feedbackid}`);
     res.json(feedback.rows);
