@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode"; // ✅ default export, not named
+import {jwtDecode} from "jwt-decode";
 import "./App.css";
 import Home from "./pages/Home";
 import AddFeedback from "./pages/AddFeedback";
@@ -13,6 +13,7 @@ import { UserProvider, UserContext } from "./context/userContext";
 
 function AppRoutes() {
   const [authenticated, setauthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { setUserdata } = useContext(UserContext);
 
   const setAuth = (bool) => {
@@ -27,12 +28,12 @@ function AppRoutes() {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const decoded = jwtDecode(token); // decode payload
+        const decoded = jwtDecode(token);
         if (decoded.exp * 1000 > Date.now()) {
           console.log(decoded);
           
           setauthenticated(true);
-          setUserdata(decoded); // 👈 store user data in context
+          setUserdata(decoded);
         } else {
           localStorage.removeItem("token");
           setauthenticated(false);
@@ -45,7 +46,10 @@ function AppRoutes() {
         setUserdata(null);
       }
     }
-  }, [setUserdata]);
+    setLoading(false);
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <Routes>
