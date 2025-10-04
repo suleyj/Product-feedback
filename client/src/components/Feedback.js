@@ -69,7 +69,7 @@ const Feedback = ({
         {upvotes}
       </button>
 
-      {hideCommentBtn &&
+      {!hideCommentBtn &&
         <Link
           to={`/detail/${feedback_id}`}
           className="flex items-center gap-2 text-navyBlue font-bold justify-self-end"

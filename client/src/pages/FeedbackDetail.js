@@ -103,7 +103,7 @@ const FeedbackDetail = () => {
         tag={feedback?.category}
         upvotes={0}
         comments={commentData.length}
-        hideCommentBtn={false}
+        hideCommentBtn={true}
       />
       <div className="bg-white p-6 mt-6 mb-6 rounded-lg">
         <p className="font-bold text-lg text-navyBlue mb-6">
