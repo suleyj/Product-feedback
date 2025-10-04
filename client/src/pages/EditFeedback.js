@@ -1,17 +1,22 @@
-import { React, useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate} from "react-router-dom";
 import FormDropdown from "../components/FormDropdown";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
+const FeedbackBaseURL = "http://localhost:5000/feedback";
+
 const EditFeedback = () => {
-  const feedback = useLocation().state;
+
+  const { id } = useParams();
+  const [feedback, setfeedback] = useState(undefined);
   const navigate = useNavigate();
 
   //Drop Down states
   const [active, setActive] = useState(false);
   const [statusActive, setStatusActive] = useState(false);
-  const [select, setselect] = useState(feedback.tag);
-  const [statusSelect, setStatusselect] = useState(feedback.status);
+  const [select, setselect] = useState('');
+  const [statusSelect, setStatusselect] = useState('');
 
   const selectChange = (e) => {
     setselect(e.currentTarget.firstChild.innerHTML);
@@ -27,8 +32,8 @@ const EditFeedback = () => {
   const status = ["Suggestion", "Planned", "In-Progress", "Live"];
 
   //Title and Description state
-  const [title, settitle] = useState(feedback.title);
-  const [description, setdescription] = useState(feedback.description);
+  const [title, settitle] = useState("");
+  const [description, setdescription] = useState("");
 
   const onTitleChange = (e) => {
     settitle(e.target.value);
@@ -50,7 +55,7 @@ const EditFeedback = () => {
 
   const saveFeedback = async (e) => {
     e.preventDefault();
-    let url = `${BaseURL}/${feedback.id}`;
+    let url = `${BaseURL}/${id}`;
     let payload = {
       title: title,
       category: select,
@@ -65,12 +70,40 @@ const EditFeedback = () => {
 
   const deleteFeedback = async (e) => {
     e.preventDefault();
-    let url = `${BaseURL}/${feedback.feedback_id}`;
+    let url = `${BaseURL}/${id}`;
     try {
       await axios.delete(url, config);
     } catch (error) {}
     navigate("/");
   };
+
+
+  useEffect(() => {
+    async function getFeedback() {
+      const url = `${FeedbackBaseURL}/${id}`;
+      const config = {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      };
+
+      try {
+        const response = await axios.get(url, config);
+        const feedback = response.data
+
+        setfeedback(feedback);
+        setselect(feedback.category)
+        setStatusselect(feedback.status)
+        settitle(feedback.title)
+        setdescription(feedback.details)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    getFeedback();
+  }, [id]);
+
+  if (!feedback) return <p>Loading...</p>;
 
   return (
     <div className=" text-sm px-6 pt-8 pb-16 text-gray md:max-w-[540px] md:mx-auto md:pt-14">

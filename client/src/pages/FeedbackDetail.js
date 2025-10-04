@@ -106,14 +106,12 @@ const FeedbackDetail = () => {
           </svg>
           <p className="text-gray font-bold">Go Back</p>
         </Link>
-        {userdata.role === "admin" && (
           <Link
-            to="/edit"
+            to={`/edit/${feedback?.id}`}
             className="bg-blue text-lightIndigo font-bold rounded-lg px-4 py-3"
           >
             Edit Feedback
           </Link>
-        )}
       </div>
       <Feedback
         title={feedback?.title}

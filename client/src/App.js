@@ -54,7 +54,7 @@ function AppRoutes() {
       <Route path="/" element={authenticated ? <Home setAuth={setAuth} /> : <Navigate to="/login" />} />
       <Route path="/add" element={authenticated ? <AddFeedback /> : <Navigate to="/login" />} />
       <Route path="/detail/:id" element={authenticated ? <FeedbackDetail /> : <Navigate to="/login" />} />
-      <Route path="/edit" element={authenticated ? <EditFeedback /> : <Navigate to="/login" />} />
+      <Route path="/edit/:id" element={authenticated ? <EditFeedback /> : <Navigate to="/login" />} />
       <Route path="/roadmap" element={authenticated ? <RoadMap /> : <Navigate to="/login" />} />
       <Route path="/login" element={!authenticated ? <Login setAuth={setAuth} /> : <Navigate to="/" />} />
       <Route path="/register" element={!authenticated ? <Registration setAuth={setAuth} /> : <Navigate to="/" />} />

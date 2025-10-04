@@ -54,7 +54,7 @@ router.put("/feedback/:id", authorization, async (req, res) => {
     const id = parseInt(req.params.id);
     const { title, category, status, description } = req.body;
     const feedback = await pool.query(
-      "UPDATE feedback SET title = $1, category = $2, details = $3, status = $4 WHERE feedback_id = $5   RETURNING *;",
+      "UPDATE feedback SET title = $1, category = $2, details = $3, status = $4 WHERE id = $5   RETURNING *;",
       [title, category, description, status, id]
     );
 
@@ -68,8 +68,13 @@ router.put("/feedback/:id", authorization, async (req, res) => {
 router.delete("/feedback/:id", authorization, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
+    await pool.query(
+      "DELETE FROM comments WHERE feedback_id = $1",
+      [id]
+    );
+
     const feedback = await pool.query(
-      "DELETE FROM feedback WHERE feedback_id = $1",
+      "DELETE FROM feedback WHERE id = $1",
       [id]
     );
     res.json(feedback.rows);
