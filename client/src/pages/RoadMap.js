@@ -35,7 +35,6 @@ const RoadMap = () => {
 
   // let feedbackTypes = [{title:'Planned', },]
   const [activeStatus, setActiveStatus] = useState("In Progress");
-  console.log(activeStatus);
   const handleStatusClick = (status) => {
     setActiveStatus(status);
   };

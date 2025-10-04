@@ -137,7 +137,6 @@ const AddFeedback = () => {
           dispatch({ type: "newTitle", payload: "" });
         })
         .catch(function (error) {
-          console.log(error);
           dispatch({
             type: "newSubmitMsg",
             payload: "Error occured when adding feedback",

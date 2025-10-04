@@ -47,7 +47,6 @@ const Registration = ({ setAuth }) => {
       const url = "http://localhost:5000/auth/register";
       const res = await axios.post(url, formData, config);
       setUserdata(res.data.user);
-      console.log(res.data);
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token);
         setAuth(true);

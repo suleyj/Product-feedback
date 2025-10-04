@@ -102,8 +102,6 @@ const Home = ({ setAuth }) => {
 
   let feedbackTotal = feedbacks.length;
 
-  console.log(userdata);
-  
   return (
     <div className="flex flex-col">
       <div className="md:px-9 md:py-14 max-w-[1110px] lg:grid lg:grid-cols-4 lg:mx-auto gap-[30px] h-full md:pb-0">

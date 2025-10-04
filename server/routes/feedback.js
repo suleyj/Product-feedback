@@ -86,7 +86,6 @@ router.post("/feedback", authorization, async (req, res) => {
       "INSERT INTO feedback (user_id, status, title, category, details) VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [user_id, "Suggestion", title, category, details]
     );
-    console.log(`CREATE feedback ${feedback.rows[0].feedbackid}`);
     res.json(feedback.rows);
   } catch (err) {
     console.error(err.message);

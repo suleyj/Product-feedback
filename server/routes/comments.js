@@ -23,7 +23,6 @@ router.post("/comments", authorization, async (req, res) => {
       "INSERT INTO comments (feedback_id, user_id, comment_text ) VALUES ($1, $2, $3) RETURNING *",
       [feedback_id, user_id, comment_text]
     );
-    //console.log(`CREATE feedback ${feedback.rows[0].feedbackid}`);
     res.json(comment.rows);
   } catch (err) {
     console.error(err.message);

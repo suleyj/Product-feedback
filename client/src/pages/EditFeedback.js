@@ -5,7 +5,6 @@ import axios from "axios";
 
 const EditFeedback = () => {
   const feedback = useLocation().state;
-  console.log(feedback);
   const navigate = useNavigate();
 
   //Drop Down states
