@@ -33,7 +33,23 @@ const FeedbackDetail = () => {
   //useEffect
   useEffect(() => {
     async function getComments() {
-      const url = `${BaseURL}/${id}`;
+      const url = `${CommentBaseURL}/${id}`;
+      const config = {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      };
+
+      try {
+        const response = await axios.get(url, config);
+        setcommentData(response.data);
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    async function getFeedback() {
+      const url = `${FeedbackBaseURL}/${id}`;
       const config = {
         headers: {
           token: localStorage.getItem("token"),
@@ -43,10 +59,12 @@ const FeedbackDetail = () => {
       try {
         const response = await axios.get(url, config);
         setfeedback(response.data);
-      } catch (err) {}
+      } catch (err) {
+        console.error(err)
+      }
     }
 
-    // getComments();
+    getComments();
     getFeedback();
   }, [id, flag]);
 

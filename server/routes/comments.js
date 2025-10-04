@@ -4,12 +4,22 @@ const authorization = require("../middleware/authorization");
 
 router.get("/comments/:id", authorization, async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
-    const comment = await pool.query(
-      "SELECT comment_text, username, fullname, image_name FROM comment INNER JOIN account ON comment.account_id=account.account_id WHERE feedback_id = $1",
-      [id]
+    const feedbackId = parseInt(req.params.id);
+
+    const comments = await pool.query(
+      `SELECT
+         c.comment_text,
+         c.created_at,
+         u.username,
+         u.fullname
+       FROM comments c
+       INNER JOIN users u ON c.user_id = u.id
+       WHERE c.feedback_id = $1
+       ORDER BY c.created_at ASC`,
+      [feedbackId]
     );
-    res.json(comment.rows);
+
+    res.json(comments.rows);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
