@@ -187,14 +187,14 @@ const Home = ({ setAuth }) => {
                 .map((feedback, index) => {
                   return (
                     <Feedback
+                      key={index}
                       title={feedback.title}
                       description={feedback.details}
                       tag={feedback.category}
                       upvotes={feedback.upvote_count}
                       comments={feedback.comment_count}
-                      key={index}
-                      feedback_id={feedback.feedback_id}
-                      account_id={userdata.id}
+                      feedback_id={feedback.id}
+                      user_id={userdata.id}
                       status={feedback.status}
                     />
                   );

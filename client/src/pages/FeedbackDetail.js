@@ -1,17 +1,17 @@
-import { React, useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Feedback from "../components/Feedback";
 import Comment from "../components/Comment";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 
-const BaseURL = "http://localhost:5000/comments";
+const CommentBaseURL = "http://localhost:5000/comments";
+const FeedbackBaseURL = "http://localhost:5000/feedback";
 
 const FeedbackDetail = () => {
-  //Feedback Id
-  const linkState = useLocation().state;
-  const id = linkState.feedback_id;
-  console.log(linkState);
+
+  const { id } = useParams();
   //state
   const [commentData, setcommentData] = useState([]);
   const [commentInput, setCommentInput] = useState({
@@ -19,6 +19,7 @@ const FeedbackDetail = () => {
     errFlag: false,
   });
   const [flag, setflag] = useState(true);
+  const [feedback, setfeedback] = useState(undefined);
 
   const onCommentChange = (e) => {
     if (commentInput.text.length >= 250)
@@ -59,7 +60,7 @@ const FeedbackDetail = () => {
     };
 
     const payload = {
-      account_id: userdata.id,
+      user_id: userdata.id,
       feedback_id: id,
       comment_text: commentInput.text,
     };
@@ -89,13 +90,6 @@ const FeedbackDetail = () => {
         {userdata.role === "admin" && (
           <Link
             to="/edit"
-            state={{
-              id: linkState.feedback_id,
-              title: linkState.title,
-              tag: linkState.tag,
-              status: linkState.status,
-              description: linkState.description,
-            }}
             className="bg-blue text-lightIndigo font-bold rounded-lg px-4 py-3"
           >
             Edit Feedback
@@ -103,11 +97,12 @@ const FeedbackDetail = () => {
         )}
       </div>
       <Feedback
-        title={linkState.title}
-        description={linkState.description}
-        tag={linkState.tag}
-        upvotes={linkState.upvotes}
+        title={feedback?.title}
+        description={feedback?.details}
+        tag={feedback?.category}
+        upvotes={0}
         comments={commentData.length}
+        hideCommentBtn={false}
       />
       <div className="bg-white p-6 mt-6 mb-6 rounded-lg">
         <p className="font-bold text-lg text-navyBlue mb-6">

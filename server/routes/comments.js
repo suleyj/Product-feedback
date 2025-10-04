@@ -18,10 +18,10 @@ router.get("/comments/:id", authorization, async (req, res) => {
 
 router.post("/comments", authorization, async (req, res) => {
   try {
-    const { feedback_id, account_id, comment_text } = req.body;
+    const {feedback_id, user_id, comment_text} = req.body;
     const comment = await pool.query(
-      "INSERT INTO comment (feedback_id, account_id, comment_text ) VALUES ($1, $2, $3) RETURNING *",
-      [feedback_id, account_id, comment_text]
+      "INSERT INTO comments (feedback_id, user_id, comment_text ) VALUES ($1, $2, $3) RETURNING *",
+      [feedback_id, user_id, comment_text]
     );
     //console.log(`CREATE feedback ${feedback.rows[0].feedbackid}`);
     res.json(comment.rows);

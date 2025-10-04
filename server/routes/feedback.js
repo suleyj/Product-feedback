@@ -42,7 +42,7 @@ router.get("/feedback/:id", authorization, async (req, res) => {
       "SELECT * FROM feedback WHERE id = $1 ",
       [id]
     );
-    res.json(feedback.rows);
+    res.json(feedback.rows[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
