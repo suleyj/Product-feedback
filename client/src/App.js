@@ -30,8 +30,6 @@ function AppRoutes() {
       try {
         const decoded = jwtDecode(token);
         if (decoded.exp * 1000 > Date.now()) {
-          console.log(decoded);
-          
           setauthenticated(true);
           setUserdata(decoded.user);
         } else {
@@ -55,7 +53,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={authenticated ? <Home setAuth={setAuth} /> : <Navigate to="/login" />} />
       <Route path="/add" element={authenticated ? <AddFeedback /> : <Navigate to="/login" />} />
-      <Route path="/detail" element={authenticated ? <FeedbackDetail /> : <Navigate to="/login" />} />
+      <Route path="/detail/:id" element={authenticated ? <FeedbackDetail /> : <Navigate to="/login" />} />
       <Route path="/edit" element={authenticated ? <EditFeedback /> : <Navigate to="/login" />} />
       <Route path="/roadmap" element={authenticated ? <RoadMap /> : <Navigate to="/login" />} />
       <Route path="/login" element={!authenticated ? <Login setAuth={setAuth} /> : <Navigate to="/" />} />

@@ -1,12 +1,17 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { IoMailOutline } from "react-icons/io5";
 import { IoImagesOutline } from "react-icons/io5";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../context/userContext";
+
 
 const Registration = ({ setAuth }) => {
+
+ const { setUserdata } = useContext(UserContext);
+
   const [inputs, setinputs] = useState({
     fullname: "",
     username: "",
@@ -41,6 +46,7 @@ const Registration = ({ setAuth }) => {
       };
       const url = "http://localhost:5000/auth/register";
       const res = await axios.post(url, formData, config);
+      setUserdata(res.data.user);
       console.log(res.data);
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token);

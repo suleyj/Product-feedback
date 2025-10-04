@@ -55,7 +55,10 @@ router.post(
 
       //5. generating our jwt token
       const token = jwtGenerator(newUser.rows[0].id);
-      res.json({ token });
+      res.json({
+      token: token,
+      user: { id: newUser.rows[0].id },
+    });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
