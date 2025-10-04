@@ -42,17 +42,18 @@ const FeedbackDetail = () => {
 
       try {
         const response = await axios.get(url, config);
-        setcommentData(response.data);
+        setfeedback(response.data);
       } catch (err) {}
     }
 
-    getComments();
+    // getComments();
+    getFeedback();
   }, [id, flag]);
 
   const postComment = async (e) => {
     e.preventDefault();
     if (commentInput.errFlag === true) return;
-    const url = `${BaseURL}`;
+    const url = `${CommentBaseURL}`;
     const config = {
       headers: {
         token: localStorage.getItem("token"),
