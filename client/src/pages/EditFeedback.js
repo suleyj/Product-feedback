@@ -88,16 +88,14 @@ const EditFeedback = () => {
       };
 
       try {
-        const response = await axios.get(url, config);
-        const feedback = response.data
-
-        setfeedback(feedback);
-        setselect(feedback.category)
-        setStatusselect(feedback.status)
-        settitle(feedback.title)
-        setdescription(feedback.details)
+        const { data } = await axios.get(url, config);
+        setfeedback(data);
+        setselect(data.category);
+        setStatusselect(data.status);
+        settitle(data.title);
+        setdescription(data.details);
       } catch (err) {
-        console.error(err)
+        navigate("/404", { replace: true });
       }
     }
     getFeedback();

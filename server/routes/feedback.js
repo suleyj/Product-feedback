@@ -42,6 +42,12 @@ router.get("/feedback/:id", authorization, async (req, res) => {
       "SELECT * FROM feedback WHERE id = $1 ",
       [id]
     );
+
+    if (feedback.rows.length === 0){
+      res.status(404).send("Cannot find resource")
+      return
+    }
+
     res.json(feedback.rows[0]);
   } catch (err) {
     console.error(err.message);

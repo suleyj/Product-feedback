@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate  } from "react-router-dom";
 import Feedback from "../components/Feedback";
 import Comment from "../components/Comment";
 import axios from "axios";
@@ -12,6 +11,8 @@ const FeedbackBaseURL = "http://localhost:5000/feedback";
 const FeedbackDetail = () => {
 
   const { id } = useParams();
+  const navigate = useNavigate();
+
   //state
   const [commentData, setcommentData] = useState([]);
   const [commentInput, setCommentInput] = useState({
@@ -57,10 +58,10 @@ const FeedbackDetail = () => {
       };
 
       try {
-        const response = await axios.get(url, config);
-        setfeedback(response.data);
+        const {data} = await axios.get(url, config);
+        setfeedback(data);
       } catch (err) {
-        console.error(err)
+         navigate("/404", { replace: true });
       }
     }
 
@@ -90,6 +91,8 @@ const FeedbackDetail = () => {
     setCommentInput({ ...commentData, text: "" });
     setflag(!flag);
   };
+
+   if (!feedback) return <p>Loading...</p>;
 
   return (
     <div className="text-sm p-6 lg:max-w-[730px] md:px-[39px] md:py-[56px] lg:mx-auto">

@@ -9,6 +9,7 @@ import EditFeedback from "./pages/EditFeedback";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import RoadMap from "./pages/RoadMap";
+import NotFound from "./pages/Notfound";
 import { UserProvider, UserContext } from "./context/userContext";
 
 function AppRoutes() {
@@ -58,6 +59,8 @@ function AppRoutes() {
       <Route path="/roadmap" element={authenticated ? <RoadMap /> : <Navigate to="/login" />} />
       <Route path="/login" element={!authenticated ? <Login setAuth={setAuth} /> : <Navigate to="/" />} />
       <Route path="/register" element={!authenticated ? <Registration setAuth={setAuth} /> : <Navigate to="/" />} />
+      <Route path="/404" element={<NotFound />} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
     </Routes>
   );
 }
