@@ -33,8 +33,7 @@ const RoadMap = () => {
     return feedback.status === "Live";
   });
 
-  // let feedbackTypes = [{title:'Planned', },]
-  const [activeStatus, setActiveStatus] = useState("In Progress");
+  const [activeStatus, setActiveStatus] = useState("Planned");
   const handleStatusClick = (status) => {
     setActiveStatus(status);
   };
@@ -77,15 +76,15 @@ const RoadMap = () => {
           }`}
           onClick={() => handleStatusClick("Planned")}
         >
-          Planned (2)
+          Planned ({plannedFeed.length})
         </p>
         <p
           className={`${
-            activeStatus === "In Progress" ? inProgressStyle : null
+            activeStatus === "In-Progress" ? inProgressStyle : null
           } w-24 flex-1 border-b-gray border-b-[1px] py-5 md:border-none `}
-          onClick={() => handleStatusClick("In Progress")}
+          onClick={() => handleStatusClick("In-Progress")}
         >
-          In-Progress (3)
+          In-Progress ({progressFeed.length})
         </p>
         <p
           className={` w-24 flex-1 border-b-gray border-b-[1px] py-5 md:border-none ${
@@ -93,22 +92,27 @@ const RoadMap = () => {
           }`}
           onClick={() => handleStatusClick("Live")}
         >
-          Live (1)
+          Live ({liveFeed.length})
         </p>
       </div>
       <div className="px-6 flex flex-col content-center flex-wrap md:hidden">
-        <p className="font-bold text-lg mb-2 text-dark">In-Progress (3)</p>
-        <p className="mb-6">Features currently being developed</p>
+        <p className="font-bold text-lg mb-2 text-dark">{activeStatus} ({feedbackData.filter( f => f.status === activeStatus).length})</p>
+        {/* <p className="mb-6">Features currently being developed</p> */}
         <div className="grid grid-cols-1 gap-4 pb-36">
-          <RoadFeedback
-            title="Add tags for solutions"
-            description="Easier to search for solutions based on a specific stack"
-            tag="Enhancement"
-            upvotes="112"
-            comments="2"
-            status="Planned"
-            color="orange"
-          />
+          {feedbackData.filter( f => f.status === activeStatus).map((feedback, index) => {
+              return (
+                <RoadFeedback
+                  title={feedback.title}
+                  description={feedback.details}
+                  tag={feedback.category}
+                  upvotes="112"
+                  comments={feedback.comment_count}
+                  status={feedback.status}
+                  key={index}
+                  feedback_id={feedback.id}
+                />
+              );
+            })}
         </div>
       </div>
 
@@ -134,7 +138,7 @@ const RoadMap = () => {
           </div>
         </div>
         <div>
-          <p className="font-bold">In Progress (2)</p>
+          <p className="font-bold">In Progress ({progressFeed.length})</p>
           <p className="mb-8"> Currently being developed</p>
           <div className="grid grid-cols-1 gap-4 pb-36">
             {progressFeed.map((feedback, index) => {
@@ -154,7 +158,7 @@ const RoadMap = () => {
           </div>
         </div>
         <div>
-          <p className="font-bold">Live (2)</p>
+          <p className="font-bold">Live ({liveFeed.length})</p>
           <p className="mb-8"> Released Features</p>
           <div className="grid grid-cols-1 gap-4 pb-36">
             {liveFeed.map((feedback, index) => {

@@ -59,16 +59,7 @@ const RoadFeedback = ({
           {upvotes}
         </div>
         <Link
-          to="/detail"
-          state={{
-            title,
-            description,
-            tag,
-            upvotes,
-            feedback_id,
-            status,
-            tag,
-          }}
+          to={`/detail/${feedback_id}`}
           className="flex items-center gap-2 text-navyBlue font-bold"
         >
           <svg width="18" height="16" xmlns="http://www.w3.org/2000/svg">
