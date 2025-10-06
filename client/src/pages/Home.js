@@ -17,7 +17,7 @@ const Home = ({ setAuth }) => {
   const { userdata } = useContext(UserContext);
 
   const [active, setActive] = useState(false);
-  const [select, setselect] = useState("Most Upvotes");
+  const [select, setselect] = useState("Most Comments");
   const [feedbackData, setfeedbackData] = useState([]);
   const [chosenTag, setChosenTag] = useState("");
 
@@ -45,7 +45,7 @@ const Home = ({ setAuth }) => {
       },
     };
 
-    const url = "http://localhost:5000/feedback";
+    const url = "/api/feedback";
 
     axios.get(url, config).then((res) => {
       setfeedbackData(res.data);

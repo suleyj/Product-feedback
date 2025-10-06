@@ -4,7 +4,7 @@ import FormDropdown from "../components/FormDropdown";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 
-const BaseURL = "http://localhost:5000/feedback";
+const BaseURL = "/api/feedback";
 const reducer = (state, action) => {
   switch (action.type) {
     case "newTitle":

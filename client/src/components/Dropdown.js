@@ -2,8 +2,8 @@ import React from "react";
 
 const Dropdown = ({ selectChange, active, select, activeChange }) => {
   const selections = [
-    "Most Upvotes",
-    "Least Upvotes",
+    // "Most Upvotes",
+    // "Least Upvotes",
     "Most Comments",
     "Least Comments",
   ];
@@ -41,7 +41,7 @@ const Dropdown = ({ selectChange, active, select, activeChange }) => {
       </button>
       {active ? (
         <div className="dropdown-content cursor-pointer w-[125%] absolute z-[99] top-[60px] bg-white text-black rounded-[10px] shadow-md shadow-neutral-400">
-          <div
+          {/* <div
             className="dropdown-item p-[10px] text-[15px] flex justify-between "
             onClick={selectChange}
           >
@@ -73,13 +73,13 @@ const Dropdown = ({ selectChange, active, select, activeChange }) => {
                 />
               </svg>
             ) : null}
-          </div>
+          </div> */}
           <div
             className="dropdown-item p-[10px] text-[15px] flex justify-between border-solid border-t-[1px] border-t-neutral-300"
             onClick={selectChange}
           >
             <p>Most Comments</p>
-            {select === selections[2] ? (
+            {select === selections[0] ? (
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="11">
                 <path
                   fill="none"
@@ -95,7 +95,7 @@ const Dropdown = ({ selectChange, active, select, activeChange }) => {
             onClick={selectChange}
           >
             <p>Least Comments</p>
-            {select === selections[3] ? (
+            {select === selections[1] ? (
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="11">
                 <path
                   fill="none"

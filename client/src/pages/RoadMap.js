@@ -14,7 +14,7 @@ const RoadMap = () => {
       },
     };
 
-    const url = "http://localhost:5000/feedback";
+    const url = "/api/feedback";
 
     axios.get(url, config).then((res) => {
       setfeedbackData(res.data);

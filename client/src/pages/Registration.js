@@ -44,7 +44,7 @@ const Registration = ({ setAuth }) => {
           "Content-Type": "multipart/form-data",
         },
       };
-      const url = "http://localhost:5000/auth/register";
+      const url = "/api/auth/register";
       const res = await axios.post(url, formData, config);
       setUserdata(res.data.user);
       if (res.status === 200) {

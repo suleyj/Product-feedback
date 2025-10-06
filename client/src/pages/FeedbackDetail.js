@@ -5,8 +5,8 @@ import Comment from "../components/Comment";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
 
-const CommentBaseURL = "http://localhost:5000/comments";
-const FeedbackBaseURL = "http://localhost:5000/feedback";
+const CommentBaseURL = "/api/comments";
+const FeedbackBaseURL = "/api/feedback";
 
 const FeedbackDetail = () => {
 

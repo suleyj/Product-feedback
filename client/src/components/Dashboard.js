@@ -19,7 +19,7 @@ const Dashboard = (props) => {
       )}
       <div className=" bg-gradientMobile md:bg-gradientTablet lg:bg-gradientDesktop bg-cover text-white px-6 py-2 flex justify-between items-center w-full fixed z-[100] md:static md:col-span-1 md:items-end md:pb-6 md:rounded-xl lg:h-[186.5px]">
         <div>
-          <p className="font-bold">Frontend Mentor</p>
+          <p className="font-bold">Suleyman Jama</p>
           <p className="text-sm">Feedback Board</p>
         </div>
         <div onClick={toggle} className="md:hidden">

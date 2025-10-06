@@ -4,7 +4,7 @@ import FormDropdown from "../components/FormDropdown";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const FeedbackBaseURL = "http://localhost:5000/feedback";
+const FeedbackBaseURL = "/api/feedback";
 
 const EditFeedback = () => {
 
@@ -45,7 +45,7 @@ const EditFeedback = () => {
 
   //Button event
 
-  const BaseURL = "http://localhost:5000/feedback";
+  const BaseURL = "/api/feedback";
 
   const config = {
     headers: {

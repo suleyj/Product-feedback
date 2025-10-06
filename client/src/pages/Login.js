@@ -25,7 +25,7 @@ const Login = ({ setAuth }) => {
         "Content-Type": "application/json",
       },
     };
-    const url = "http://localhost:5000/auth/login";
+    const url = "/api/auth/login";
     const data = {
       username: inputs.username,
       password: inputs.password,
