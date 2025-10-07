@@ -5,20 +5,20 @@ const authorization = require("../middleware/authorization");
 router.get("/feedback", authorization, async (req, res) => {
   try {
     const allFeedback = await pool.query(
-      "SELECT * FROM feedback ORDER BY id ASC "
+      "SELECT * FROM feedback_board.feedback ORDER BY id ASC "
     );
 
     const upvotes = await pool.query(
       "SELECT f.id, f.title, COUNT(u.id) AS upvote_count " +
-        "FROM feedback f LEFT JOIN upvotes u ON f.id = u.feedback_id " +
+        "FROM feedback_board.feedback f LEFT JOIN feedback_board.upvotes u ON f.id = u.feedback_id " +
         "GROUP BY f.id, f.title " +
         "ORDER BY f.id"
     );
 
     const counts = await pool.query(
       "SELECT f.id, COUNT(c.id) AS comment_count " +
-        "FROM feedback f " +
-        "LEFT JOIN comments c ON f.id = c.feedback_id " +
+        "FROM feedback_board.feedback f " +
+        "LEFT JOIN feedback_board.comments c ON f.id = c.feedback_id " +
         "GROUP BY f.id " +
         "order by f.id"
     );
@@ -39,7 +39,7 @@ router.get("/feedback/:id", authorization, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const feedback = await pool.query(
-      "SELECT * FROM feedback WHERE id = $1 ",
+      "SELECT * FROM feedback_board.feedback WHERE id = $1 ",
       [id]
     );
 
@@ -60,7 +60,7 @@ router.put("/feedback/:id", authorization, async (req, res) => {
     const id = parseInt(req.params.id);
     const { title, category, status, description } = req.body;
     const feedback = await pool.query(
-      "UPDATE feedback SET title = $1, category = $2, details = $3, status = $4 WHERE id = $5   RETURNING *;",
+      "UPDATE feedback_board.feedback SET title = $1, category = $2, details = $3, status = $4 WHERE id = $5   RETURNING *;",
       [title, category, description, status, id]
     );
 
@@ -75,12 +75,12 @@ router.delete("/feedback/:id", authorization, async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     await pool.query(
-      "DELETE FROM comments WHERE feedback_id = $1",
+      "DELETE FROM feedback_board.comments WHERE feedback_id = $1",
       [id]
     );
 
     const feedback = await pool.query(
-      "DELETE FROM feedback WHERE id = $1",
+      "DELETE FROM feedback_board.feedback WHERE id = $1",
       [id]
     );
     res.json(feedback.rows);
@@ -94,7 +94,7 @@ router.post("/feedback", authorization, async (req, res) => {
   try {
     const { user_id, title, category, details } = req.body;
     const feedback = await pool.query(
-      "INSERT INTO feedback (user_id, status, title, category, details) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      "INSERT INTO feedback_board.feedback (user_id, status, title, category, details) VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [user_id, "Suggestion", title, category, details]
     );
     res.json(feedback.rows);

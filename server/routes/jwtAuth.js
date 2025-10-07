@@ -24,7 +24,7 @@ router.post(
       const { fullname, username, password } = req.body;
       //2. check if user exist(if user exis then throw error)
       const account = await pool.query(
-        "SELECT * FROM users WHERE username = $1",
+        "SELECT * FROM feedback_board.users WHERE username = $1",
         [username]
       );
       if (account.rows.length !== 0) {
@@ -49,7 +49,7 @@ router.post(
 
       //5. enter the new user inside our database
       let newUser = await pool.query(
-        "INSERT INTO users (fullname, username, password) VALUES ($1, $2, $3) RETURNING *",
+        "INSERT INTO feedback_board.users (fullname, username, password) VALUES ($1, $2, $3) RETURNING *",
         [fullname, username, bcryptPassword ]
       );
 
@@ -73,7 +73,7 @@ router.post("/login", validInfo, async (req, res) => {
     const { username, password } = req.body;
 
     //2. check if user doesn't exist (if not then we throw error)
-    const user = await pool.query("SELECT * FROM users WHERE username = $1", [
+    const user = await pool.query("SELECT * FROM feedback_board.users WHERE username = $1", [
       username,
     ]);
 

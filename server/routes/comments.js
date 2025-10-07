@@ -12,8 +12,8 @@ router.get("/comments/:id", authorization, async (req, res) => {
          c.created_at,
          u.username,
          u.fullname
-       FROM comments c
-       INNER JOIN users u ON c.user_id = u.id
+       FROM feedback_board.comments c
+       INNER JOIN feedback_board.users u ON c.user_id = u.id
        WHERE c.feedback_id = $1
        ORDER BY c.created_at ASC`,
       [feedbackId]
@@ -30,7 +30,7 @@ router.post("/comments", authorization, async (req, res) => {
   try {
     const {feedback_id, user_id, comment_text} = req.body;
     const comment = await pool.query(
-      "INSERT INTO comments (feedback_id, user_id, comment_text ) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO feedback_board.comments (feedback_id, user_id, comment_text ) VALUES ($1, $2, $3) RETURNING *",
       [feedback_id, user_id, comment_text]
     );
     res.json(comment.rows);
