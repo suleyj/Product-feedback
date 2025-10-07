@@ -1,5 +1,4 @@
-import React from "react";
-import profileImg1 from "../assets/user-images/image-elijah.jpg";
+import profileImg1 from "../assets/default_user.png";
 
 const Comment = ({ fullname, username, comment_text, image_name }) => {
   return (
