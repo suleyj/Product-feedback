@@ -43,32 +43,14 @@ const Feedback = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl text-sm grid grid-cols-2 md:grid-cols-6 md:px-8 md:py-7 text-navyBlue">
-      <div className=" col-span-2 md:col-span-4">
+    <div className="bg-white p-6 rounded-xl text-sm grid grid-cols-6 md:px-8 md:py-7 text-navyBlue">
+      <div className="col-span-5">
         <p className=" font-bold mb-3">{title}</p>
         <p className="text-gray mb-2">{description}</p>
         <div className="rounded-lg px-4 py-2 inline-block text-blue bg-lightIndigo font-bold mb-2">
           {tag}
         </div>
       </div>
-      <button
-        className={`rounded-lg px-4 py-2 bg-lightIndigo text-navyBlue font-bold flex hidden items-center gap-2 md:justify-self-start md:order-first md:self-start  md:flex-col md:px-2 md:py-3 hover:bg-lightPurple md:w-10 w-[75px] justify-between ${
-          upvote ? upvoteStyle : null
-        }`}
-        onClick={toggleUpvote}
-      >
-        <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M1 6l4-4 4 4"
-            stroke={upvote ? "#fff" : "#4661E6"}
-            strokeWidth="2"
-            fill="none"
-            fillRule="evenodd"
-          />
-        </svg>
-        {upvotes}
-      </button>
-
       {!hideCommentBtn &&
         <Link
           to={`/detail/${feedback_id}`}
