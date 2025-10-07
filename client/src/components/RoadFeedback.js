@@ -45,8 +45,8 @@ const RoadFeedback = ({
       <div className="rounded-lg px-4 py-2 inline-block text-blue bg-lightIndigo hover:bg-blue hover:text-white font-bold mb-2">
         {tag}
       </div>
-      <div className="flex justify-between">
-        <div className="rounded-lg px-4 py-2 bg-lightIndigo text-navyBlue font-bold flex items-center gap-2">
+      <div className="flex justify-end">
+        {/* <div className="rounded-lg px-4 py-2 bg-lightIndigo text-navyBlue font-bold flex items-center gap-2">
           <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M1 6l4-4 4 4"
@@ -57,10 +57,10 @@ const RoadFeedback = ({
             />
           </svg>
           {upvotes}
-        </div>
+        </div> */}
         <Link
           to={`/detail/${feedback_id}`}
-          className="flex items-center gap-2 text-navyBlue font-bold"
+          className="flex items-center gap-2 text-navyBlue font-bold cursor-pointer"
         >
           <svg width="18" height="16" xmlns="http://www.w3.org/2000/svg">
             <path
