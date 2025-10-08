@@ -1,17 +1,23 @@
-import React from "react";
-
 const Tag = (props) => {
+  const { tagName, selectedTag, onTagClick, show, toggle } = props;
+
   const style =
-    props.selectedTag === props.tagName ? " text-white font bg-blue" : "";
+    selectedTag === tagName ? " text-white font bg-blue" : "";
+
+  const handleSelect = (e) => {
+    onTagClick?.(e);
+    if (show) toggle?.();
+  };
+
   return (
     <div
       className={
         "rounded-lg px-4 py-2 inline-block bg-gray-300 text-blue bg-lightIndigo font-bold text-[13px] cursor-pointer" +
         style
       }
-      onClick={props.onTagClick}
+      onClick={handleSelect}
     >
-      {props.tagName}
+      {tagName}
     </div>
   );
 };

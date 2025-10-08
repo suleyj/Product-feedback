@@ -42,36 +42,50 @@ const Dashboard = (props) => {
             tagName="All"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
+            show={show}
+            toggle={toggle}
           />
           <Tag
             tagName="UI"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
+            show={show}
+            toggle={toggle}
           />
           <Tag
             tagName="UX"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
+            show={show}
+            toggle={toggle}
           />
           <Tag
             tagName="User"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
+            show={show}
+            toggle={toggle}
           />
           <Tag
             tagName="Enhancement"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
+            show={show}
+            toggle={toggle}
           />
           <Tag
             tagName="Bug"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
+            show={show}
+            toggle={toggle}
           />
           <Tag
             tagName="Feature"
             selectedTag={props.chosenTag}
             onTagClick={props.onTagClick}
+            show={show}
+            toggle={toggle}
           />
         </div>
         <div className="bg-white text-navyBlue p-6 rounded-xl">
