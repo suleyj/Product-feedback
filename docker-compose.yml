@@ -6,7 +6,7 @@ services:
     working_dir: /app
     volumes:
       - ./client:/app # mount your frontend code
-      - ./frontend_build:/app/build # build output available on host
+      - ./build:/app/build # build output available on host
     command: sh -c "npm install && npm run build"
     networks:
       - sj-site-prod
@@ -17,7 +17,7 @@ services:
     container_name: product_feedback_backend
     working_dir: /app
     volumes:
-      - ./backend:/app # mount your backend code
+      - ./server:/app # mount your backend code
     command: sh -c "npm install && npx dbmate up && npm run start"
     ports:
       - "5000:5000"
