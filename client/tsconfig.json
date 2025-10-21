@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",                        // Modern JS
+    "module": "ESNext",                        // ES modules
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],  // Browser + modern JS features
+    "jsx": "react-jsx",                         // JSX transform for React 18+
+    "strict": true,                             // Enable strict type checks
+    "esModuleInterop": true,                    // Smooth default imports from CJS
+    "allowSyntheticDefaultImports": true,      // Allows default imports from CJS modules
+    "forceConsistentCasingInFileNames": true,  // Catch filename case errors
+    "noFallthroughCasesInSwitch": true,        // Safer switch statements
+    "skipLibCheck": true,                       // Skip checking node_modules
+    "moduleResolution": "Node",                 // Resolve imports like Node
+    "isolatedModules": true,                    // Needed for CRA / Vite
+    "verbatimModuleSyntax": false,              // Allow extension-less imports
+  },
+  "include": ["src"]                            // Only compile / include src folder
+}

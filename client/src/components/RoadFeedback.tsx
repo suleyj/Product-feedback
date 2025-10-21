@@ -40,13 +40,13 @@ const RoadFeedback = ({
         <p>{status}</p>
       </div>
 
-      <p className="text-navyBlue font-bold mb-3">{title}</p>
-      <p className="text-gray mb-6">{description}</p>
-      <div className="rounded-lg px-4 py-2 inline-block text-blue bg-lightIndigo hover:bg-blue hover:text-white font-bold mb-2">
+      <p className="mb-3 font-bold text-navyBlue">{title}</p>
+      <p className="mb-6 text-gray">{description}</p>
+      <div className="inline-block px-4 py-2 mb-2 font-bold rounded-lg text-blue bg-lightIndigo hover:bg-blue hover:text-white">
         {tag}
       </div>
       <div className="flex justify-end">
-        {/* <div className="rounded-lg px-4 py-2 bg-lightIndigo text-navyBlue font-bold flex items-center gap-2">
+        {/* <div className="flex items-center gap-2 px-4 py-2 font-bold rounded-lg bg-lightIndigo text-navyBlue">
           <svg width="10" height="7" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M1 6l4-4 4 4"
@@ -60,7 +60,7 @@ const RoadFeedback = ({
         </div> */}
         <Link
           to={`/detail/${feedback_id}`}
-          className="flex items-center gap-2 text-navyBlue font-bold cursor-pointer"
+          className="flex items-center gap-2 font-bold cursor-pointer text-navyBlue"
         >
           <svg width="18" height="16" xmlns="http://www.w3.org/2000/svg">
             <path
