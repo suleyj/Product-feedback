@@ -24,5 +24,6 @@
   "devDependencies": {
     "dbmate": "^2.28.0",
     "nodemon": "^3.1.10"
-  }
+  },
+  "type": "module"
 }

@@ -1,4 +1,4 @@
-module.exports = function (req, res, next) {
+export default function validInfo(req, res, next) {
   const { fullname, username, password, confirm } = req.body;
 
   function validUsername(username) {

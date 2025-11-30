@@ -1,20 +1,26 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
-const express = require("express");
+import express from "express";
 const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
 
-app.use("/api/auth", require("./routes/jwtAuth"));
-app.use("/api", require("./routes/feedback"));
-app.use("/api", require("./routes/comments"));
-app.use("/api", require("./routes/upvote"));
+import jwtAuthRoutes from "./routes/jwtAuth.js";
+import feedbackRoutes from "./routes/feedback.js";
+import commentsRoutes from "./routes/comments.js";
+import upvoteRoutes from "./routes/upvote.js";
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.use("/api/auth", jwtAuthRoutes);
+app.use("/api", feedbackRoutes);
+app.use("/api", commentsRoutes);
+app.use("/api", upvoteRoutes);
+
+app.get("/", (_req, res) => {
+    res.send("Hello World!");
 });
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+    console.log(`listening on port ${port}`);
 });
