@@ -25,7 +25,7 @@ router.get("/feedback", authorization, async (_req, res) => {
         );
 
         for (let i = 0; i < allFeedback.rows.length; i++) {
-            allFeedback.rows[i].upvotes = upvotes.rows[i].upvote_count;
+            allFeedback.rows[i].upvote_count = upvotes.rows[i].upvote_count;
             allFeedback.rows[i].comment_count = counts.rows[i].comment_count;
         }
 
