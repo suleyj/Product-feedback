@@ -54,7 +54,7 @@ router.post(
             const token = jwtGenerator(newUser.rows[0].id);
             res.json({
                 token: token,
-                user: { id: newUser.rows[0].id },
+                user: { id: newUser.rows[0].id, role: newUser.rows[0].role},
             });
         } catch (err) {
             console.error(err.message);
@@ -93,7 +93,7 @@ router.post("/login", validInfo, async (req, res) => {
         const token = jwtGenerator(user.rows[0].id);
         res.json({
             token: token,
-            user: { id: user.rows[0].id },
+            user: { id: user.rows[0].id , role: user.rows[0].role},
         });
     } catch (err) {
         console.error(err.message);
