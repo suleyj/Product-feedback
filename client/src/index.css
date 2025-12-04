@@ -1,18 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
 
-  html,
-  body {
+@theme {
+    --color-purple: #AD1FEA;
+    --color-purple: #AD1FEA;
+    --color-blue: #4661E6;
+    --color-white: #FFFFFF;
+    --color-lightIndigo: #F2F4FF;
+    --color-lightGray: #F7F8FD;
+    --color-navyBlue: #3A4374;
+    --color-gray: #647196;
+    --color-orange: #F49F85;
+    --color-lightBlue: #62BCFA;
+    --color-dark: #373F68;
+    --color-red: #D73737;
+    --color-lightPurple: #CFD7FF;
+
+    --background-image-gradientMobile: url('./assets/suggestions/mobile/background-header.png');
+    --background-image-gradientTablet: url('./assets/suggestions/tablet/background-header.png');
+    --background-image-gradientDesktop: url('./assets/suggestions/desktop/background-header.png');
+
+    --font-jost: "Jost", sans-serif;
+}
+
+html,
+body {
     height: 100%;
     width: 100%;
     background-color: #f2f4ff;
-  }
 }
