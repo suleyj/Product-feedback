@@ -1,6 +1,6 @@
 import express from "express";
 import pool from "../db.js";
-import authorization from "../middleware/authorization.js";
+import { authorization } from "../middleware/authorization.js";
 const router = express.Router();
 
 router.get("/comments/:id", authorization, async (req, res) => {

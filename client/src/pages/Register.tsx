@@ -67,7 +67,7 @@ export default function Registration({ loginUser }: Props) {
     return (
         <div className="flex items-center justify-center mt-20">
             <form
-                className="px-8 py-10 bg-white rounded-lg w-80"
+                className="px-8 py-10 bg-white rounded-lg w-90"
                 onSubmit={formSubmit}
             >
                 <p className="mb-8 text-2xl font-bold text-navyBlue">
@@ -136,7 +136,7 @@ export default function Registration({ loginUser }: Props) {
                     Register
                 </button>
                 <p className="h-6 text-red">{inputs.errorMsg}</p>
-                <p className="text-gray-400">
+                <p className="text-gray text-center">
                     Already have an account?{" "}
                     <Link
                         to="/login"

@@ -1,6 +1,6 @@
 import express from "express";
 import pool from "../db.js";
-import authorization from "../middleware/authorization.js";
+import { authorization } from "../middleware/authorization.js";
 const router = express.Router();
 
 router.post("/upvote", authorization, async (req, _res) => {

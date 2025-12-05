@@ -6,9 +6,9 @@ import UserContext from "../context/userContext";
 
 type Props = {
     loginUser: (isAuthenticated: boolean) => void;
-}
+};
 
-export default function Login( {loginUser} : Props) {
+export default function Login({ loginUser }: Props) {
     const context = useContext(UserContext);
 
     if (!context) {
@@ -27,18 +27,41 @@ export default function Login( {loginUser} : Props) {
         setinputs({ ...inputs, [e.target.name]: e.target.value, errorMsg: "" });
     };
 
-    const formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        login()
+    };
+
+
+    const demo = () => {
+        login('demo');
+    };
+
+    const login = (role?: string) => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
             },
         };
         const url = "/api/auth/login";
-        const data = {
-            username: inputs.username,
-            password: inputs.password,
+
+        let data = {
+            username: "",
+            password: "",
         };
+
+        if (role && role === "demo") {
+            data = {
+                username: "demo",
+                password: "demo",
+            };
+        } else {
+            data = {
+                username: inputs.username,
+                password: inputs.password,
+            };
+        }
+
         axios
             .post(url, data, config)
             .then((res) => {
@@ -49,7 +72,7 @@ export default function Login( {loginUser} : Props) {
                 }
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
                 setinputs({ ...inputs, errorMsg: err.response.data });
             });
     };
@@ -58,7 +81,7 @@ export default function Login( {loginUser} : Props) {
         <div className="flex justify-center items-center mt-20">
             <form
                 className="bg-white px-5 py-10 rounded-lg"
-                onSubmit={formSubmit}
+                onSubmit={submit}
                 autoComplete="off"
             >
                 <p className="text-2xl mb-8 font-bold text-navyBlue">Login</p>
@@ -94,6 +117,13 @@ export default function Login( {loginUser} : Props) {
                     type="submit"
                 >
                     Login Now
+                </button>
+                <button
+                    className="text-center w-full bg-gray rounded-md p-2 mb-4 text-white"
+                    type="button"
+                    onClick={demo}
+                >
+                    Demo
                 </button>
                 <p className="text-red h-6 mb-2">{inputs.errorMsg}</p>
                 <p className="text-gray">

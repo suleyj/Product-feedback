@@ -4,7 +4,7 @@ dotenv.config();
 
 //this middleware will on continue on if the token is inside the local storage
 
-export default function authorization (req, res, next) {
+export function authorization (req, res, next) {
     // Get token from header
     const token = req.header("token");
 
