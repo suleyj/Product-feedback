@@ -2,10 +2,12 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config({ path: "./vars/.env" });
 
-export default function jwtGenerator(user_id) {
+export default function jwtGenerator(user) {
     const payload = {
         user: {
-            id: user_id,
+            id: user.id,
+            username: user.username,
+            role: user.role
         },
     };
 

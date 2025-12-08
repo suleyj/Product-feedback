@@ -50,11 +50,13 @@ router.post(
                 [fullname, username, bcryptPassword],
             );
 
+            const user = newUser.rows[0]
+
             //5. generating our jwt token
-            const token = jwtGenerator(newUser.rows[0].id);
+            const token = jwtGenerator(user);
             res.json({
                 token: token,
-                user: { id: newUser.rows[0].id, role: newUser.rows[0].role},
+                user: { id: user.id, username: user.username, role: user.role},
             });
         } catch (err) {
             console.error(err.message);
@@ -70,7 +72,7 @@ router.post("/login", validInfo, async (req, res) => {
         const { username, password } = req.body;
 
         //2. check if user doesn't exist (if not then we throw error)
-        const user = await pool.query(
+        let user = await pool.query(
             "SELECT * FROM feedback_board.users WHERE username = $1",
             [username],
         );
@@ -79,10 +81,12 @@ router.post("/login", validInfo, async (req, res) => {
             return res.status(401).json("Password or Username is incorrect");
         }
 
+        user = user.rows[0] 
+
         //3. check if incoming password is the same the database password
         const validPassword = await bcrypt.compare(
             password,
-            user.rows[0].password,
+            user.password,
         );
 
         if (!validPassword) {
@@ -90,10 +94,10 @@ router.post("/login", validInfo, async (req, res) => {
         }
 
         //4.give them a jwtToken
-        const token = jwtGenerator(user.rows[0].id);
+        const token = jwtGenerator(user);
         res.json({
             token: token,
-            user: { id: user.rows[0].id , role: user.rows[0].role},
+            user: { id: user.id, username: user.username, role: user.role},
         });
     } catch (err) {
         console.error(err.message);
