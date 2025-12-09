@@ -213,6 +213,7 @@ const Home = ({ loginUser }: Props) => {
                                             }
                                             feedback_id={feedback.id}
                                             user_id={user?.id}
+                                            username={feedback.username}
                                         />
                                     );
                                 })}

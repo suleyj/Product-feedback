@@ -1,5 +1,3 @@
-import { useState, useContext } from "react";
-import UserContext from "../context/userContext";
 import { Link } from "react-router";
 //import axios from "axios";
 
@@ -12,6 +10,7 @@ type Props = {
     feedback_id?: number;
     user_id?: number | undefined;
     hideCommentBtn?: boolean;
+    username: string
 };
 
 export default function Feedback({
@@ -21,18 +20,10 @@ export default function Feedback({
     comments,
     feedback_id,
     hideCommentBtn,
+    username
 }: Props) {
 
 
-    //context
-    const context = useContext(UserContext);
-
-    if (!context) {
-        throw new Error("useContext must be inside a UserProvider");
-    }
-
-
-    const { user } = context;
     //const [upvote, setupvote] = useState(false);
 
     //const upvoteStyle = "text-white bg-blue";
@@ -71,7 +62,7 @@ export default function Feedback({
                 </div>
             </div>
             <div className="flex justify-between col-span-full">
-            <p>@{user?.username}</p>
+            <p>@{username}</p>
                 {!hideCommentBtn && (
                     <Link
                         to={`/feedback/${feedback_id}`}

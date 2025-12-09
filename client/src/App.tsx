@@ -60,6 +60,11 @@ function App() {
     return (
         <UserContext.Provider value={{user, setUserData}}>
             <div className="font-jost">
+                {authenticated &&
+                    <div className="flex justify-end pt-2 pr-40">
+                        <p>@{user?.username}</p>
+                    </div>
+                }
                 <Routes>
                     <Route path="/" element={authenticated ? <Home loginUser={loginUser}/> : <Navigate to="/login"/>} />
                     <Route path="add" element={authenticated ? <AddFeedback/> : <Navigate to="/login"/>}/>

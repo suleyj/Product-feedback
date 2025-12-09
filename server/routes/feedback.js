@@ -6,7 +6,9 @@ const router = express.Router();
 router.get("/feedback", authorization, async (_req, res) => {
     try {
         const allFeedback = await pool.query(
-            "SELECT * FROM feedback_board.feedback ORDER BY id ASC ",
+            "SELECT f.*, username FROM feedback_board.feedback f " +
+            "JOIN feedback_board.users u ON f.user_id = u.id  " +
+            "ORDER BY f.id ASC",
         );
 
         const upvotes = await pool.query(
@@ -40,7 +42,9 @@ router.get("/feedback/:id", authorization, async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const feedback = await pool.query(
-            "SELECT * FROM feedback_board.feedback WHERE id = $1 ",
+            "SELECT f.*, username FROM feedback_board.feedback f " +
+            "JOIN feedback_board.users u ON f.user_id = u.id  " +
+            " WHERE f.id = $1 ",
             [id],
         );
 

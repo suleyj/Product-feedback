@@ -13,9 +13,9 @@ CREATE TABLE feedback_board.feedback (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES feedback_board.users(id) ON DELETE CASCADE,
   status VARCHAR(50) NOT NULL,
-  title VARCHAR(70) UNIQUE NOT NULL,
+  title VARCHAR(70) NOT NULL,
   category VARCHAR(50) NOT NULL,
-  details VARCHAR(350) UNIQUE NOT NULL,
+  details VARCHAR(350) NOT NULL,
   created_at TIMESTAMP DEFAULT NOW()
 );
 

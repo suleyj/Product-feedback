@@ -129,6 +129,7 @@ const FeedbackDetail = () => {
                 )}
             </div>
             <Feedback
+                username={feedback?.username}
                 title={feedback?.title}
                 description={feedback?.details}
                 tag={feedback?.category}
