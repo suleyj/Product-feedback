@@ -16,6 +16,8 @@ type JwtPayload = {
     exp: number;
 };
 
+const test : string = 123
+
 function App() {
     const [authenticated, setauthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
