@@ -1,0 +1,27 @@
+services:
+  # Frontend build
+  frontend-build:
+    image: node:20-alpine
+    container_name: product_feedback_frontend
+    working_dir: /app
+    volumes:
+      - ./client:/app # mount your frontend code
+      - ./build:/app/build # build output available on host
+    command: sh -c "npm install && npm run build"
+    networks:
+      - sj-site-prod
+
+  # Backend API
+  backend:
+    image: node:20-alpine
+    container_name: product_feedback_backend
+    working_dir: /app
+    volumes:
+      - ./server:/app # mount your backend code
+    command: sh -c "npm install && npx dbmate up && npm run start"
+    networks:
+      - sj-site-prod
+
+networks:
+  sj-site-prod:
+    external: true
