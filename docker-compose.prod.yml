@@ -1,7 +1,7 @@
 services:
   # Frontend build
   frontend-build:
-    image: node:20-bullseye
+    image: node:20-alpine
     container_name: product_feedback_frontend
     working_dir: /app
     volumes:
@@ -13,7 +13,7 @@ services:
 
   # Backend API
   backend:
-    image: node:20-bullseye
+    image: node:20-alpine
     container_name: product_feedback_backend
     working_dir: /app
     volumes:
