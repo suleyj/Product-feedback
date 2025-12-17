@@ -13,7 +13,7 @@ services:
 
   # Backend API
   backend:
-    image: node:20-alpine
+    image: node:20-bullseye
     container_name: product_feedback_backend
     working_dir: /app
     volumes:
