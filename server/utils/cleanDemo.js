@@ -6,7 +6,7 @@ export async function cleanDemoUserData() {
       WHERE role = 'demo'
     `);
 
-    const demoUserId = rows[0];
+    const demoUserId = rows[0].id;
 
     await pool.query("DELETE FROM feedback_board.comments WHERE user_id = $1", [
         demoUserId,

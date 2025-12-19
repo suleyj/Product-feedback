@@ -55,7 +55,7 @@ function App() {
         checkToken();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div></div>;
 
     return (
         <UserContext.Provider value={{user, setUserData}}>

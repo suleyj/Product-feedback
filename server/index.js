@@ -23,7 +23,8 @@ app.get("/", (_req, res) => {
 
 
 //remove demo user info every week
-cron.schedule("0 0 * * 0", () => {
+cron.schedule("0 0 * * *"
+, () => {
     cleanDemoUserData()
 });
 
