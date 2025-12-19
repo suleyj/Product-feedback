@@ -52,19 +52,7 @@ Product-feedback/
 ├── docker-compose.yml
 ├── docker-compose.prod.yml
 └── README.md
-
----
-
-## 📂 Project Structure
-
-```txt
-Product-feedback/
-├── client/                 # React frontend
-├── server/                 # Node.js backend
-├── .github/workflows/      # CI workflows
-├── docker-compose.yml
-├── docker-compose.prod.yml
-└── README.md
+```
 
 ---
 
