@@ -1,4 +1,4 @@
-# 📦 Product-feedback
+# Product-feedback
 
 A full-stack product feedback application built with **React (client)** and **Node.js / Express (server)**.  
 Users can submit feedback, comment, upvote ideas, and interact with product requests in a collaborative way.
@@ -7,17 +7,17 @@ Users can submit feedback, comment, upvote ideas, and interact with product requ
 
 ## 🚀 Features
 
-- 📝 Create and manage product feedback
-- 💬 Comment threads on feedback
-- 👍 Upvote system
-- 🔒 Authentication with demo users
-- 🧹 Automated cleanup for demo user data
-- 🧱 PostgreSQL database
-- 🐳 Docker & Docker Compose support
+- Create and manage product feedback
+- Comment threads on feedback
+- Upvote system
+- Authentication with demo users
+- Automated cleanup for demo user data
+- PostgreSQL database
+- Docker & Docker Compose support
 
 ---
 
-## 🧠 Tech Stack
+## Tech Stack
 
 **Frontend**
 - Vite
@@ -58,21 +58,24 @@ Product-feedback/
 
 ## Getting Started
 
-Frontend
+# Frontend
 ```sh
 cd client/
 npm i
 npm run dev
 ```
-Backend
+# Backend
+
+create .env using .env.example 
+
 ```sh
 cd server/
 npm i
 npm run dev
 ```
-Database
+# Database
 
-Add
+same .env as server
 
 ```sh
 cd server/
