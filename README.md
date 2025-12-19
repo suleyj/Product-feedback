@@ -20,6 +20,7 @@ Users can submit feedback, comment, upvote ideas, and interact with product requ
 ## 🧠 Tech Stack
 
 **Frontend**
+- Vite
 - React
 - TypeScript
 - Tailwind CSS
@@ -28,12 +29,16 @@ Users can submit feedback, comment, upvote ideas, and interact with product requ
 - Node.js
 - Express
 - TypeScript
-- PostgreSQL (`pg`)
+- PostgreSQL
 
 **DevOps**
 - Docker
 - Docker Compose
 - GitHub Actions
+- dbmate (migrations)
+
+**Authentication**
+- JWT Webtokens
 
 ---
 
@@ -47,3 +52,28 @@ Product-feedback/
 ├── docker-compose.yml
 ├── docker-compose.prod.yml
 └── README.md
+
+---
+## Getting Started
+Frontend
+```sh
+cd client/
+npm i
+npm run dev
+```
+Backend
+```sh
+cd server/
+npm i
+npm run dev
+```
+Database
+
+Add
+
+```sh
+cd server/
+docker compose up -d
+```
+
+
