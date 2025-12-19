@@ -9,7 +9,6 @@ Users can submit feedback, comment, upvote ideas, and interact with product requ
 
 - Create and manage product feedback
 - Comment threads on feedback
-- Upvote system
 - Authentication with demo users
 - Automated cleanup for demo user data
 - PostgreSQL database
