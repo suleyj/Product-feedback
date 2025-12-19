@@ -66,7 +66,7 @@ npm run dev
 ```
 **Backend**
 
-create .env using .env.example 
+Create .env using .env.example 
 
 ```sh
 cd server/
@@ -75,7 +75,7 @@ npm run dev
 ```
 **Database**
 
-same .env as server
+Same .env as server
 
 ```sh
 cd server/
