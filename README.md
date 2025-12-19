@@ -58,13 +58,13 @@ Product-feedback/
 
 ## Getting Started
 
-### Frontend
+**Frontend**
 ```sh
 cd client/
 npm i
 npm run dev
 ```
-### Backend
+**Backend**
 
 create .env using .env.example 
 
@@ -73,7 +73,7 @@ cd server/
 npm i
 npm run dev
 ```
-### Database
+**Database**
 
 same .env as server
 
