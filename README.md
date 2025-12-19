@@ -12,7 +12,7 @@ Users can submit feedback, comment, upvote ideas, and interact with product requ
 - Authentication with demo users
 - Automated cleanup for demo user data
 - PostgreSQL database
-- Docker & Docker Compose support
+- CI/CD using Github actions, and docker
 
 ---
 
