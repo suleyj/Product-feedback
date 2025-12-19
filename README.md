@@ -13,6 +13,7 @@ Users can submit feedback, comment, and interact with product requests in a coll
 - Automated cleanup for demo user data
 - PostgreSQL database
 - CI/CD using Github actions, and docker
+- Role based authorization (user,admin, demo)
 
 ---
 
