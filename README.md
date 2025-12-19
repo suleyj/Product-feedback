@@ -5,7 +5,7 @@ Users can submit feedback, comment, upvote ideas, and interact with product requ
 
 ---
 
-## 🚀 Features
+## Features
 
 - Create and manage product feedback
 - Comment threads on feedback
