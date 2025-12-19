@@ -1,7 +1,7 @@
 # Product-feedback
 
 A full-stack product feedback application built with **React (client)** and **Node.js / Express (server)**.  
-Users can submit feedback, comment, upvote ideas, and interact with product requests in a collaborative way.
+Users can submit feedback, comment, and interact with product requests in a collaborative way.
 
 ---
 
