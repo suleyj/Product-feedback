@@ -13,6 +13,3 @@ jobs:
 
       - name: List current directory
         run: ls -la
-
-      - name: List a specific folder
-        run: ls -la /home/youruser/
