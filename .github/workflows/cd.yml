@@ -9,16 +9,18 @@ jobs:
 
     steps:
       - name: remove build
-        run: rm -rf build/
+        run: |
+          pwd
+          ls -al
     
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with: 
-          clean: false 
-          fetch-depth: 0
+      # - name: Checkout repository
+      #   uses: actions/checkout@v3
+      #   with: 
+      #     clean: false 
+      #     fetch-depth: 0
 
-      - name: Stop containers
-        run: docker compose -f docker-compose.prod.yml down
+      # - name: Stop containers
+      #   run: docker compose -f docker-compose.prod.yml down
 
-      - name: Start containers
-        run: docker compose -f docker-compose.prod.yml up -d
+      # - name: Start containers
+      #   run: docker compose -f docker-compose.prod.yml up -d
