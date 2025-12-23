@@ -1,6 +1,4 @@
 name: cd
-        run: docker compose -f docker-compose.prod.yml down
-        run: docker compose -f docker-compose.prod.yml up
 
 on:
   workflow_dispatch: # allows manual trigger from GitHub
