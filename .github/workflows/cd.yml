@@ -8,6 +8,9 @@ jobs:
     runs-on: self-hosted  # make sure this runs on your server runner
 
     steps:
+      - name: remove build
+        run: rm -rf build/
+    
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
