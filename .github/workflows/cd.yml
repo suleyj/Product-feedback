@@ -1,22 +1,18 @@
 name: cd
 
 on:
-  workflow_dispatch: # allows manual trigger from GitHub
+  push:
+    branches:
+      - main
 
 jobs:
   list-files:
-    runs-on: self-hosted  # make sure this runs on your server runner
+    runs-on: self-hosted
 
     steps:
-      - name: remove build
+      - name: Pull Repo
         run: git pull
-    
-      # - name: Checkout repository
-      #   uses: actions/checkout@v3
-      #   with: 
-      #     clean: false 
-      #     fetch-depth: 0
-
+        
       - name: Stop containers
         run: docker compose -f docker-compose.prod.yml down
 
