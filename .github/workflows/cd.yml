@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: remove build
         run: |
-          sudo chown -R $(whoami):$(whoami) build || true
+          chown -R $(whoami):$(whoami) build || true
           rm -rf build
     
       - name: Checkout repository
