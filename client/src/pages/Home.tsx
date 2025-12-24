@@ -8,6 +8,7 @@ import Dropdown from "../components/Dropdown";
 import Feedback from "../components/Feedback";
 import { Link } from "react-router";
 import UserContext from "../context/userContext";
+
 type Props = {
     loginUser: (isAuthenticated: boolean) => void;
 };
