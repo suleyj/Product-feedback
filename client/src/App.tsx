@@ -61,7 +61,7 @@ function App() {
         <UserContext.Provider value={{user, setUserData}}>
             <div className="font-jost">
                 {authenticated &&
-                    <div className="flex justify-end pt-2 pr-40">
+                    <div className="hidden md:flex justify-end pt-2 md:pr-20 xl:pr-30">
                         <p>@{user?.username}</p>
                     </div>
                 }
