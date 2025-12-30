@@ -21,6 +21,7 @@ services:
     command: sh -c "npm install && npx dbmate up && npm run start"
     networks:
       - sj-site-prod
+    restart: on-failure:0
 
 networks:
   sj-site-prod:
