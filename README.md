@@ -48,7 +48,7 @@ Users can submit feedback, comment, and interact with product requests in a coll
 Product-feedback/
 ├── client/                 # React frontend
 ├── server/                 # Node.js backend
-├── .github/workflows/      # CI workflows
+├── .github/workflows/      # CI/CD workflows
 ├── docker-compose.yml
 ├── docker-compose.prod.yml
 └── README.md
