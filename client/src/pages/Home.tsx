@@ -27,6 +27,7 @@ const Home = ({ loginUser }: Props) => {
     const { user } = context;
 
     const [active, setActive] = useState(false);
+    const [feedbackLoaded, setFeedbackLoaded] = useState(false);
     const [select, setselect] = useState("Most Comments");
     const [feedbackData, setfeedbackData] = useState<Feedback[]>([]);
     const [chosenTag, setChosenTag] = useState("");
@@ -46,6 +47,7 @@ const Home = ({ loginUser }: Props) => {
 
         axios.get(url, config).then((res) => {
             setfeedbackData(res.data);
+            setFeedbackLoaded(true)
         });
     }, []);
 
@@ -161,7 +163,7 @@ const Home = ({ loginUser }: Props) => {
                             </Link>
                         </div>
                     </div>
-                    {feedbackTotal < 1 ? (
+                    {feedbackTotal < 1 && feedbackLoaded ? (
                         <div className="flex flex-col items-center justify-center py-20 mx-6 mt-8 text-center bg-white rounded-xl px-7 md:mx-0 md:px-40">
                             <img
                                 className=" mb-11"
